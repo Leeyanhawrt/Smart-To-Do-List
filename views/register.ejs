@@ -11,12 +11,14 @@
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/routes/register.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+
 </head>
 
 <body>
   <h1>Registration</h1>
   <main>
-    <form action="/register" method="POST">
+    <form action="/register" method="POST" class="registration-form">
       <div>
         <label for="email">email address:</label>
         <input type="email" name="email" />
@@ -25,8 +27,25 @@
         <label for="password">password:</label>
         <input type="password" name="password" />
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn-register">Submit</button>
     </form>
+
+      <form action="/register" method="POST" class="movies-form">
+        <button type="submit" class="btn-movies">Search Movies</button>
+      </form>
+
+      <form action="/register" method="POST" class="restaurants-form">
+        <button type="submit" class="btn-restaurants">Search Restaurants</button>
+      </form>
+
+      <form action="/register" method="POST" class="products-form">
+        <button type="submit" class="btn-products">Search Products</button>
+      </form>
+
+      <form action="/register" method="POST" class="books-form">
+        <button type="submit" class="btn-books">Search Books</button>
+      </form>
+
   </main>
 
 </body>
