@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>DASHBOARD PAGE</title>
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/routes/dashboard.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+
+</head>
+
+<body>
+  <h1>DASHBOARD</h1>
+  <main>
+
+    <form action="/dashboard" method="POST" class="search-form">
+      <div>
+        <label for="search">Search Query Here:</label>
+        <input type="text" name="search" />
+      </div>
+    </form>
+
+      <form action="/dashboard" method="POST" class="movies-form">
+        <button type="submit" class="btn-movies">Search Movies</button>
+      </form>
+
+      <form action="/dashboard" method="POST" class="restaurants-form">
+        <button type="submit" class="btn-restaurants">Search Restaurants</button>
+      </form>
+
+      <form action="/dashboard" method="POST" class="products-form">
+        <button type="submit" class="btn-products">Search Products</button>
+      </form>
+
+      <form action="/dashboard" method="POST" class="books-form">
+        <button type="submit" class="btn-books">Search Books</button>
+      </form>
+
+  </main>
+
+</body>
+
+</html>
