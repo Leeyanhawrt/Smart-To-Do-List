@@ -40,7 +40,25 @@ $(document).ready(function () {
   $restaurantsForm.submit(function (event) {
     event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
 
-    const queryString = "the%20terminator";
+    const queryString = "pizzanova"
+
+    const settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": `https://documenu.p.rapidapi.com/restaurants/search/fields?restaurant_name=${queryString}&restaurant_phone=5854420444`,
+      "method": "GET",
+      "headers": {
+        "x-api-key": "<REQUIRED>",
+        "X-RapidAPI-Key": "6d6e13193dmsh88cdaf118eaa6dep158c5bjsn0f1ba7da2820",
+        "X-RapidAPI-Host": "documenu.p.rapidapi.com"
+      }
+    };
+
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+    });
+
+
 
     $.ajax({
       type: "GET",
