@@ -19,28 +19,51 @@
   <h1>DASHBOARD</h1>
   <main>
 
-    <form action="/dashboard" method="POST" class="search-form">
-      <div>
-        <label for="search">Search Query Here:</label>
-        <input type="text" name="search" />
-      </div>
-    </form>
-
+    <h3>
       <form action="/dashboard" method="POST" class="movies-form">
-        <button type="submit" class="btn-movies">Search Movies</button>
+        <label for="search-movie">Search Movie Here:</label>
+        <input type="text" name="movie" id="movie-query"/>
+        <div>
+          <button type="submit" class="btn-movies">Search Movies</button>
+        </div>
       </form>
+    </h3>
 
+    <h3>
       <form action="/dashboard" method="POST" class="restaurants-form">
-        <button type="submit" class="btn-restaurants">Search Restaurants</button>
+        <label for="search-restaurant">Search Restaurants Here:</label>
+        <input type="text" name="restaurant" id="restaurant-query"/>
+        <div>
+          <button type="submit" class="btn-restaurants">Search Restaurants</button>
+        </div>
       </form>
+    </h3>
 
+    <h3>
       <form action="/dashboard" method="POST" class="products-form">
-        <button type="submit" class="btn-products">Search Products</button>
+        <label for="search-product">Search Product Here:</label>
+        <input type="text" name="product" id="product-query"/>
+        <div>
+          <button type="submit" class="btn-products">Search Products</button>
+        </div>
       </form>
+    </h3>
 
+    <h3>
       <form action="/dashboard" method="POST" class="books-form">
-        <button type="submit" class="btn-books">Search Books</button>
+        <div>
+          <label for="search-book">Search Book Title Here:</label>
+          <input type="text" name="book" id="book-query"/>
+        </div>
+        <div>
+          <label for="search-author">Search Book Author Here:</label>
+          <input type="text" name="author" id="author-query"/>
+        </div>
+        <div>
+          <button type="submit" class="btn-books">Search Books</button>
+        </div>
       </form>
+    </h3>
 
   </main>
 
