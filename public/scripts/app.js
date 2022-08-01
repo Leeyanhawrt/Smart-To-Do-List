@@ -1,4 +1,9 @@
 // Client facing scripts here
+//API INFORMATION
+//MOVIES            - https://www.omdbapi.com/
+//FOOD BUSINESSES   - https://api.brandfetch.io/v2/brands/
+//BOOKS             - https://www.googleapis.com/books/v1/
+
 
 /**************************************************** HELPER FUNCTIONS ************************************************************/
 //requiring helper functions from helpers.js
@@ -14,6 +19,13 @@ function sanitizeBookAndAuthorQuery(userInput) {
   const sanitizeBookOrAuthorString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "+");
   return sanitizeBookOrAuthorString
 }
+
+//function to sanitize the users restaurant/cafe input using regex into correct format for API use
+function sanitizeFoodBusinessQuery(userInput) {
+  const sanitizeFoodBusinessString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "");
+  return sanitizeFoodBusinessString
+}
+
 //function to handle the movies user query and corresponding api request response data and convert into temporary object
 function apiMoviesQueryToObject(apiResponseData) {
   const movieQueryObject = {
@@ -41,6 +53,16 @@ function apiBooksQueryToObject(apiResponseData) {
     "PUBLISH DATE": apiResponseData.items[0].volumeInfo.publishedDate,
   };
   return booksQueryObject;
+}
+
+//function to handle the food business user query and corresponding api request response data and convert into temporary object
+function apiFoodBusinessQueryToObject(apiResponseData) {
+  const foodBusinessQueryObject = {
+    "NAME": apiResponseData.name,
+    "DESCRIPTION": apiResponseData.description,
+    "LOGO": apiResponseData.logos[0].formats[0].src,
+  };
+  return foodBusinessQueryObject;
 }
 /**************************************************** HELPER FUNCTIONS ************************************************************/
 
@@ -97,69 +119,92 @@ $(document).ready(function () {
   $restaurantsForm.submit(function (event) {
     event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
 
-    const queryString = "";
+    //jQuery variable that takes the users restaurant/cafe query input and stores into variable
+    const $foodBusinessInputFromUser = $('#restaurant-query').val();
+
+    //storing the user input into new variable by running it as parameter in sanitize function
+    const sanitizedFoodBusinessQuery = sanitizeFoodBusinessQuery($foodBusinessInputFromUser);
+
+    console.log($foodBusinessInputFromUser);
+    console.log(sanitizedFoodBusinessQuery);
+
 
     $.ajax({
-      type: "GET",
-      url: ``,
+      url: `https://api.brandfetch.io/v2/brands/${sanitizedFoodBusinessQuery}.com`,
+      type: 'GET',
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader('Authorization', 'Bearer pAfXYuJYJLCanSk1voTNaoyqJxnYtyGybku75eSeKI0=');
+      },
       success: function (data) {
         console.log(data);
-      },
-    })
-  })
-
-  //Event handler for when the products button is submitted
-  $productsForm.submit(function (event) {
-    event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
-
-    const queryString = "";
-
-    $.ajax({
-      type: "GET",
-      url: ``,
-      success: function (data) {
-        console.log(data);
-      },
-    })
-  })
-  //Event handler for when the books button is submitted
-  $booksForm.submit(function (event) {
-    event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
-
-    //jQuery variable that takes the users book and author query input and stores into variables
-    const $bookInputFromUser = $('#book-query').val();
-    const $authorInputFromUser = $('#author-query').val();
-
-    //storing the user inputs into new variables by running it as parameter in sanitize function
-    const sanitizedBookQuery = sanitizeBookAndAuthorQuery($bookInputFromUser);
-    const sanitizedAuthorQuery = sanitizeBookAndAuthorQuery($authorInputFromUser);
-
-    // console.log($bookInputFromUser);
-    // console.log($authorInputFromUser);
-    // console.log(sanitizedBookQuery);
-    // console.log(sanitizedAuthorQuery);
-
-    // const queryTitle = "brave+new+world";
-    // const queryAuthor = "aldous+huxley";
-
-    //ajax request for googles book api, returns a series of statements with required information that is contained within the response object
-    $.ajax({
-      type: "GET",
-      url: `https://www.googleapis.com/books/v1/volumes?q=${sanitizedBookQuery}+inauthor:${sanitizedAuthorQuery}&key=AIzaSyADHzbY7CBGfxvALFDuOC6R4OenddipLBM`,
-      success: function (data) {
-        const currentBookObject = apiBooksQueryToObject(data);
-        console.log(currentBookObject);
-        for (const [key, value] of Object.entries(currentBookObject)) {
+        const foodBusinessQueryObject = {
+          "NAME": data.name,
+          "DESCRIPTION": data.description,
+          "LOGO": data.logos[0].formats[0].src,
+        };
+        // console.log(foodBusinessQueryObject);
+        // const currentFoodBusinessObject = sanitizeFoodBusinessQuery(data);
+        // console.log(currentFoodBusinessObject);
+        for (const [key, value] of Object.entries(foodBusinessQueryObject)) {
           console.log(`${key}: ${value}`);
         }
-        // console.log("TITLE:", data.items[0].volumeInfo.title);
-        // console.log("AUTHOR:", data.items[0].volumeInfo.authors);
-        // console.log("DESCRIPTION:", data.items[0].volumeInfo.description);
-        // console.log("THUMBNAIL:", data.items[0].volumeInfo.imageLinks.thumbnail);
-        // console.log("TYPE:", data.items[0].volumeInfo.printType);
-        // console.log("PUBLISHER:", data.items[0].volumeInfo.publisher);
-        // console.log("PUBLISH DATE:", data.items[0].volumeInfo.publishedDate);
       },
+    });
+
+    //Event handler for when the products button is submitted
+    $productsForm.submit(function (event) {
+      event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
+
+      const queryString = "";
+
+      $.ajax({
+        type: "GET",
+        url: ``,
+        success: function (data) {
+          console.log(data);
+        },
+      })
+    })
+
+    //Event handler for when the books button is submitted
+    $booksForm.submit(function (event) {
+      event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
+
+      //jQuery variable that takes the users book and author query input and stores into variables
+      const $bookInputFromUser = $('#book-query').val();
+      const $authorInputFromUser = $('#author-query').val();
+
+      //storing the user inputs into new variables by running it as parameter in sanitize function
+      const sanitizedBookQuery = sanitizeBookAndAuthorQuery($bookInputFromUser);
+      const sanitizedAuthorQuery = sanitizeBookAndAuthorQuery($authorInputFromUser);
+
+      // console.log($bookInputFromUser);
+      // console.log($authorInputFromUser);
+      // console.log(sanitizedBookQuery);
+      // console.log(sanitizedAuthorQuery);
+
+      // const queryTitle = "brave+new+world";
+      // const queryAuthor = "aldous+huxley";
+
+      //ajax request for googles book api, returns a series of statements with required information that is contained within the response object
+      $.ajax({
+        type: "GET",
+        url: `https://www.googleapis.com/books/v1/volumes?q=${sanitizedBookQuery}+inauthor:${sanitizedAuthorQuery}&key=AIzaSyADHzbY7CBGfxvALFDuOC6R4OenddipLBM`,
+        success: function (data) {
+          const currentBookObject = apiBooksQueryToObject(data);
+          console.log(currentBookObject);
+          for (const [key, value] of Object.entries(currentBookObject)) {
+            console.log(`${key}: ${value}`);
+          }
+          // console.log("TITLE:", data.items[0].volumeInfo.title);
+          // console.log("AUTHOR:", data.items[0].volumeInfo.authors);
+          // console.log("DESCRIPTION:", data.items[0].volumeInfo.description);
+          // console.log("THUMBNAIL:", data.items[0].volumeInfo.imageLinks.thumbnail);
+          // console.log("TYPE:", data.items[0].volumeInfo.printType);
+          // console.log("PUBLISHER:", data.items[0].volumeInfo.publisher);
+          // console.log("PUBLISH DATE:", data.items[0].volumeInfo.publishedDate);
+        },
+      })
     })
   })
 });
