@@ -6,9 +6,14 @@ module.exports = (db) => {
     res.render("dashboard");
   });
 
-  router.post("/", (req, res) => {
-    res.redirect("/home"); //should redirect to home page with login,not sure the urls yet
+  router.get("/confirmation", (req,res) => {
+    const templateVars = currentMovieObject
+    res.render("confirmation", currentMovieObject)
   });
+
+  router.post('/', (req,res) => {
+    res.redirect('/dashboard/confirmation')
+  })
 
   return router;
 };

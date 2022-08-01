@@ -79,7 +79,7 @@ $(document).ready(function () {
 
   //Event handler for when the movies button is submitted
   $moviesForm.submit(function (event) {
-    event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
+    // event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
 
     //jQuery variable that takes the users movie query input and stores into variable
     const $movieInputFromUser = $('#movie-query').val();
@@ -102,6 +102,7 @@ $(document).ready(function () {
         for (const [key, value] of Object.entries(currentMovieObject)) {
           console.log(`${key}: ${value}`);
         }
+        return currentMovieObject
         // console.log("TITLE", data.Title);
         // console.log("GENRE", data.Genre);
         // console.log("PLOT", data.Plot);
@@ -111,7 +112,18 @@ $(document).ready(function () {
         // console.log("RELEASED", data.Released);
         // console.log("RUNTIME", data.Runtime);
         // console.log("TYPE", data.Type);
-      },
+      }.then((currentMovieObject) => {
+        $.ajax({
+          type: "POST",
+          url: 'https://localhost:8080/dashboard/confirmation',
+          success: () => {
+            console.log(currentMovieObject)
+          },
+          error: (xhr, exception) => {
+            console.log(xhr.status)
+          }
+        })
+      }),
       error: function (xhr, exception) {
         let msg = '';
         if (xhr.status === 0) {
