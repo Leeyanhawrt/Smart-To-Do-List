@@ -57,4 +57,15 @@ section {
   margin-top: 3%;
 }
 
+.show_todo{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 
+  article {
+    width: 20%;
+    height: 100%;
+    border: 1px solid #493657;
+    background-color: #BEE5BF;
+  }
+}
