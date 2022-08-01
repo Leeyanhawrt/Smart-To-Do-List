@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>DASHBOARD PAGE</title>
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/routes/dashboard.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/helpers.js"></script>
+
+
+</head>
+
+<body>
+  <h1>DASHBOARD</h1>
+  <main>
+
+    <h3>
+      <form action="/dashboard" method="POST" class="movies-form">
+        <label for="search-movie">Search Movie/Shows Here:</label>
+        <input type="text" name="movie" id="movie-query"/>
+        <div>
+          <button type="submit" class="btn-movies">Search Movies/Shows</button>
+        </div>
+      </form>
+    </h3>
+
+    <h3>
+      <form action="/dashboard" method="POST" class="restaurants-form">
+        <label for="search-restaurant">Search Restaurants Here:</label>
+        <input type="text" name="restaurant" id="restaurant-query"/>
+        <div>
+          <button type="submit" class="btn-restaurants">Search Restaurants</button>
+        </div>
+      </form>
+    </h3>
+
+    <h3>
+      <form action="/dashboard" method="POST" class="products-form">
+        <label for="search-product">Search Product Here:</label>
+        <input type="text" name="product" id="product-query"/>
+        <div>
+          <button type="submit" class="btn-products">Search Products</button>
+        </div>
+      </form>
+    </h3>
+
+    <h3>
+      <form action="/dashboard" method="POST" class="books-form">
+        <div>
+          <label for="search-book">Search Book Title Here:</label>
+          <input type="text" name="book" id="book-query"/>
+        </div>
+        <div>
+          <label for="search-author">Search Book Author Here:</label>
+          <input type="text" name="author" id="author-query"/>
+        </div>
+        <div>
+          <button type="submit" class="btn-books">Search Books</button>
+        </div>
+      </form>
+    </h3>
+
+  </main>
+
+</body>
+
+</html>
