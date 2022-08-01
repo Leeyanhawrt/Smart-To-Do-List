@@ -6,12 +6,12 @@
 
 //function to sanitize the users input using regex into correct format for API use
 function sanitizeMovieQuery(userInput) {
-  const sanitizedMovieString = userInput.trim().replace(/[^a-zA-Z]/g, " ").trim().replace(/ /g, "%20");
+  const sanitizedMovieString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "%20");
   return sanitizedMovieString
 }
 //function to sanitize the users book and author inputs using regex into correct format for API use
 function sanitizeBookAndAuthorQuery(userInput) {
-  const sanitizeBookOrAuthorString = userInput.trim().replace(/[^a-zA-Z]/g, " ").trim().replace(/ /g, "+");
+  const sanitizeBookOrAuthorString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "+");
   return sanitizeBookOrAuthorString
 }
 //function to handle the movies user query and corresponding api request response data and convert into temporary object
@@ -68,7 +68,7 @@ $(document).ready(function () {
     // console.log($movieInputFromUser);
     // console.log(sanitizedMovieQuery);
 
-    // const queryMovie = "the%20terminator";
+    // const queryMovie = "despicable%20me%202";
 
     //ajax request for the movies api called omdbapi, returns a series of statements with required information that is contained within the response object
     $.ajax({
