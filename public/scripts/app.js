@@ -112,6 +112,26 @@ $(document).ready(function () {
         // console.log("RUNTIME", data.Runtime);
         // console.log("TYPE", data.Type);
       },
+      error: function (xhr, exception) {
+        let msg = '';
+        if (xhr.status === 0) {
+          msg = 'Not connect.\n Verify Network.';
+        } else if (xhr.status == 404) {
+          msg = 'Requested page not found. [404]';
+        } else if (xhr.status == 500) {
+          msg = 'Internal Server Error [500].';
+        } else if (exception === 'parsererror') {
+          msg = 'Requested JSON parse failed.';
+        } else if (exception === 'timeout') {
+          msg = 'Time out error.';
+        } else if (exception === 'abort') {
+          msg = 'Ajax request aborted.';
+        } else {
+          msg = 'Uncaught Error.\n' + xhr.responseText;
+        }
+        console.log(xhr.status);
+        console.log(msg);
+      },
     })
   })
 
@@ -128,7 +148,7 @@ $(document).ready(function () {
     console.log($foodBusinessInputFromUser);
     console.log(sanitizedFoodBusinessQuery);
 
-
+    //ajax request for the api from Brandfetch called Brand API, returns a series of statements with required information that is contained within the response object
     $.ajax({
       url: `https://api.brandfetch.io/v2/brands/${sanitizedFoodBusinessQuery}.com`,
       type: 'GET',
@@ -149,6 +169,26 @@ $(document).ready(function () {
           console.log(`${key}: ${value}`);
         }
       },
+      error: function (xhr, exception) {
+        let msg = '';
+        if (xhr.status === 0) {
+          msg = 'Not connect.\n Verify Network.';
+        } else if (xhr.status == 404) {
+          msg = 'Requested page not found. [404]';
+        } else if (xhr.status == 500) {
+          msg = 'Internal Server Error [500].';
+        } else if (exception === 'parsererror') {
+          msg = 'Requested JSON parse failed.';
+        } else if (exception === 'timeout') {
+          msg = 'Time out error.';
+        } else if (exception === 'abort') {
+          msg = 'Ajax request aborted.';
+        } else {
+          msg = 'Uncaught Error.\n' + xhr.responseText;
+        }
+        console.log(xhr.status);
+        console.log(msg);
+      },
     });
 
     //Event handler for when the products button is submitted
@@ -162,6 +202,26 @@ $(document).ready(function () {
         url: ``,
         success: function (data) {
           console.log(data);
+        },
+        error: function (xhr, exception) {
+          let msg = '';
+          if (xhr.status === 0) {
+            msg = 'Not connect.\n Verify Network.';
+          } else if (xhr.status == 404) {
+            msg = 'Requested page not found. [404]';
+          } else if (xhr.status == 500) {
+            msg = 'Internal Server Error [500].';
+          } else if (exception === 'parsererror') {
+            msg = 'Requested JSON parse failed.';
+          } else if (exception === 'timeout') {
+            msg = 'Time out error.';
+          } else if (exception === 'abort') {
+            msg = 'Ajax request aborted.';
+          } else {
+            msg = 'Uncaught Error.\n' + xhr.responseText;
+          }
+          console.log(xhr.status);
+          console.log(msg);
         },
       })
     })
@@ -203,6 +263,26 @@ $(document).ready(function () {
           // console.log("TYPE:", data.items[0].volumeInfo.printType);
           // console.log("PUBLISHER:", data.items[0].volumeInfo.publisher);
           // console.log("PUBLISH DATE:", data.items[0].volumeInfo.publishedDate);
+        },
+        error: function (xhr, exception) {
+          let msg = '';
+          if (xhr.status === 0) {
+            msg = 'Not connect.\n Verify Network.';
+          } else if (xhr.status == 404) {
+            msg = 'Requested page not found. [404]';
+          } else if (xhr.status == 500) {
+            msg = 'Internal Server Error [500].';
+          } else if (exception === 'parsererror') {
+            msg = 'Requested JSON parse failed.';
+          } else if (exception === 'timeout') {
+            msg = 'Time out error.';
+          } else if (exception === 'abort') {
+            msg = 'Ajax request aborted.';
+          } else {
+            msg = 'Uncaught Error.\n' + xhr.responseText;
+          }
+          console.log(xhr.status);
+          console.log(msg);
         },
       })
     })
