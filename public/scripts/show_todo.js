@@ -18,10 +18,13 @@ $(document).ready(function() {
     }
   };
 
-  const listContentExample = [{title: "book1" }, {title: "book2" }, {title: "book3" }, {title: "book4" }];
+  const listContentExample1 = [{title: "book1" }, {title: "book2" }, {title: "book3" }, {title: "book4" }];
+  const listContentExample2 = [{title: "book1" }, {title: "book2" }, {title: "book3" }, {title: "book4" }];
+  const listContentExample3 = [{title: "book1" }, {title: "book2" }, {title: "book3" }, {title: "book4" }];
+  const listContentExample4 = [{title: "book1" }, {title: "book2" }, {title: "book3" }, {title: "book4" }];
 
 
-  console.log(renderListContent(listContentExample, "bookList"));
+  console.log(renderListContent(listContentExample1, "bookList"));
 
   $.ajax({
     type: "GET",
@@ -29,7 +32,7 @@ $(document).ready(function() {
     success: (data) => {
       renderListContent(listContentExample, "bookList");
     }
-  
+
   });
 
 });
