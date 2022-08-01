@@ -79,7 +79,7 @@ $(document).ready(function () {
 
   //Event handler for when the movies button is submitted
   $moviesForm.submit(function (event) {
-    // event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
+    event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
 
     //jQuery variable that takes the users movie query input and stores into variable
     const $movieInputFromUser = $('#movie-query').val();
@@ -93,58 +93,69 @@ $(document).ready(function () {
     // const queryMovie = "despicable%20me%202";
 
     //ajax request for the movies api called omdbapi, returns a series of statements with required information that is contained within the response object
-    $.ajax({
-      type: "GET",
-      url: `https://www.omdbapi.com/?t=${sanitizedMovieQuery}&apikey=a6b04247`,
-      success: function (data) {
-        const currentMovieObject = apiMoviesQueryToObject(data);
-        console.log(currentMovieObject);
-        for (const [key, value] of Object.entries(currentMovieObject)) {
-          console.log(`${key}: ${value}`);
-        }
-        return currentMovieObject
-        // console.log("TITLE", data.Title);
-        // console.log("GENRE", data.Genre);
-        // console.log("PLOT", data.Plot);
-        // console.log("POSTER", data.Poster);
-        // console.log("RATED", data.Rated);
-        // console.log("IMDB RATING", data.imdbRating);
-        // console.log("RELEASED", data.Released);
-        // console.log("RUNTIME", data.Runtime);
-        // console.log("TYPE", data.Type);
-      }.then((currentMovieObject) => {
+
+    function apiMovieRequest() {
+      return new Promise((resolve, reject) => {
         $.ajax({
-          type: "POST",
-          url: 'https://localhost:8080/dashboard/confirmation',
-          success: () => {
-            console.log(currentMovieObject)
+          type: "GET",
+          url: `https://www.omdbapi.com/?t=${sanitizedMovieQuery}&apikey=a6b04247`,
+          success: function (data) {
+            const currentMovieObject = apiMoviesQueryToObject(data);
+            // for (const [key, value] of Object.entries(currentMovieObject)) {
+            //   console.log(`${key}: ${value}`);
+            // }
+            resolve(currentMovieObject);
+            // console.log("TITLE", data.Title);
+            // console.log("GENRE", data.Genre);
+            // console.log("PLOT", data.Plot);
+            // console.log("POSTER", data.Poster);
+            // console.log("RATED", data.Rated);
+            // console.log("IMDB RATING", data.imdbRating);
+            // console.log("RELEASED", data.Released);
+            // console.log("RUNTIME", data.Runtime);
+            // console.log("TYPE", data.Type);
           },
-          error: (xhr, exception) => {
-            console.log(xhr.status)
+          error: function (xhr, exception) {
+            let msg = '';
+            if (xhr.status === 0) {
+              msg = 'Not connect.\n Verify Network.';
+            } else if (xhr.status == 404) {
+              msg = 'Requested page not found. [404]';
+            } else if (xhr.status == 500) {
+              msg = 'Internal Server Error [500].';
+            } else if (exception === 'parsererror') {
+              msg = 'Requested JSON parse failed.';
+            } else if (exception === 'timeout') {
+              msg = 'Time out error.';
+            } else if (exception === 'abort') {
+              msg = 'Ajax request aborted.';
+            } else {
+              msg = 'Uncaught Error.\n' + xhr.responseText;
+            }
+            reject(xhr.status);
+            // console.log(msg);
           }
         })
-      }),
-      error: function (xhr, exception) {
-        let msg = '';
-        if (xhr.status === 0) {
-          msg = 'Not connect.\n Verify Network.';
-        } else if (xhr.status == 404) {
-          msg = 'Requested page not found. [404]';
-        } else if (xhr.status == 500) {
-          msg = 'Internal Server Error [500].';
-        } else if (exception === 'parsererror') {
-          msg = 'Requested JSON parse failed.';
-        } else if (exception === 'timeout') {
-          msg = 'Time out error.';
-        } else if (exception === 'abort') {
-          msg = 'Ajax request aborted.';
-        } else {
-          msg = 'Uncaught Error.\n' + xhr.responseText;
-        }
-        console.log(xhr.status);
-        console.log(msg);
-      },
-    })
+      })
+    }
+
+    apiMovieRequest()
+      .then((data) => {
+        console.log(data);
+        // $.ajax({
+        //   type: 'POST',
+        //   url: 'http://localhost:8080/dashboard/',
+        //   success: () => {
+        //     console.log("YES THIS WORKED");
+        //   },
+        //   error: (xhr, exception) => {
+        //     console.log(xhr.status);
+        //   }
+        // })
+      })
+      .catch((error) => {
+        console.log(error)
+      });
   })
 
   //Event handler for when the restaurants button is submitted

@@ -9,13 +9,13 @@ module.exports = (db) => {
   });
 
   router.get("/confirmation", (req,res) => {
-    const templateVars = currentMovieObject
-    res.render("confirmation", currentMovieObject)
+    res.render("confirmation")
   });
 
   router.post('/', (req,res) => {
-    res.redirect('/dashboard/confirmation')
-  });
+    res.sendStatus(204);
+    // res.redirect('/dashboard/confirmation')
+  })
 
   return router;
 };
