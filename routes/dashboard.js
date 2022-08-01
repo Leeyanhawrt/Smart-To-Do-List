@@ -2,6 +2,8 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
+
+  console.log("aaa");
   router.get("/", (req, res) => {
     res.render("dashboard");
   });
@@ -13,7 +15,7 @@ module.exports = (db) => {
 
   router.post('/', (req,res) => {
     res.redirect('/dashboard/confirmation')
-  })
+  });
 
   return router;
 };
