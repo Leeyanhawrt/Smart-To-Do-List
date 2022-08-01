@@ -3,7 +3,6 @@ const router  = express.Router();
 
 module.exports = (db) => {
 
-  console.log("aaa");
   router.get("/", (req, res) => {
     res.render("dashboard");
   });
