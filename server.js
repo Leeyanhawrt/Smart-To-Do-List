@@ -44,11 +44,11 @@ const dashboardRoutes = require("./routes/dashboard");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
-app.use("/api/register", registerRoutes(db));
-app.use("/api/login", loginRoutes(db));
-app.use("/api/dashboard", dashboardRoutes(db));
+app.use("/users", usersRoutes(db));
+app.use("/widgets", widgetsRoutes(db));
+app.use("/register", registerRoutes(db));
+app.use("/login", loginRoutes(db));
+app.use("/dashboard", dashboardRoutes(db));
 
 
 // Note: mount other resources here, using the same pattern above
