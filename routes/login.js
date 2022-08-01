@@ -7,7 +7,7 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    res.redirect("/home"); //should redirect to home page with login,not sure the urls yet
+    res.redirect("/dashboard"); //should redirect to home page with login,not sure the urls yet
   });
 
   return router;
