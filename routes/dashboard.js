@@ -6,6 +6,7 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     console.log("before db query");
     // console.log(db);
+    // res.render("dashboard");
     return db.query(`SELECT * FROM users;`)
       .then(data => {
         console.log("after db query");
@@ -20,7 +21,6 @@ module.exports = (db) => {
       });
 
     // console.log("here");
-    // res.render("dashboard");
   });
 
   router.get("/confirmation", (req, res) => {
