@@ -4,15 +4,15 @@ const router = express.Router();
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    console.log("before db query");
+    // console.log("before db query");
     // console.log(db);
-    // res.render("dashboard");
-    return db.query(`SELECT * FROM users;`)
-      .then(data => {
-        console.log("after db query");
-        const users = data.rows;
-        console.log(users);
-        res.json({ users });
+    return db.query(`SELECT title FROM books WHERE id IN (SELECT session.book_id FROM users JOIN session ON users.id = user_id WHERE users.id = 1);`)
+    .then(data => {
+      // console.log("after db query");
+      const tempVar = data.rows;
+      console.log(tempVar);
+      res.render("dashboard",tempVar);
+        // res.json({ users });
       })
       .catch(err => {
         res
