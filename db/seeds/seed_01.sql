@@ -83,16 +83,18 @@ VALUES
   ('cloth', 'T-shirt', 3),
   ('home', 'light', 3);
 
-
 INSERT INTO
   SESSION (
     user_id,
     book_id,
     product_id,
-    resaurant_id,
+    restaurant_id,
     movie_id
   )
 VALUES
-  (1, 1, 1, 1, 1),
-  (2, 2, 2, 2, 2),
-  (3, 3, 3, 3, 3);
+  (1, 1, NULL, 1, 1),
+  (1, 2, 2, 3, 1),
+  (1, 3, 1, 1, 3),
+  (1, NULL, 2, 2, 2),
+  (1, NULL, 3, NULL, 3),
+  (2, 1, NULL, NULL, NULL);

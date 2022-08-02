@@ -47,7 +47,7 @@ CREATE TABLE session (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   book_id INTEGER REFERENCES books(id) ON DELETE CASCADE,
   product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
-  resaurant_id INTEGER REFERENCES restaurants(id) ON DELETE CASCADE,
+  restaurant_id INTEGER REFERENCES restaurants(id) ON DELETE CASCADE,
   movie_id INTEGER REFERENCES movies(id) ON DELETE CASCADE
 );
 

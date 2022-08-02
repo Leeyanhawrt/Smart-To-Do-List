@@ -16,23 +16,68 @@ let addItemToProductsList = false;
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    // console.log("before db query");
-    // console.log(db);
-    return db.query(`SELECT title FROM books WHERE id IN (SELECT session.book_id FROM users JOIN session ON users.id = user_id WHERE users.id = 1);`)
-    .then(data => {
-      // console.log("after db query");
-      const tempVar = data.rows;
-      console.log(tempVar);
-      res.render("dashboard",tempVar);
-        // res.json({ users });
+    res.render("dashboard");
+  });
+
+  router.get("/book", (req, res) => {
+    return db.query(`SELECT title FROM books
+    WHERE id IN (SELECT session.book_id FROM users
+    JOIN session ON users.id = user_id WHERE users.id = 1);`)
+      .then(data => {
+        const results = data.rows;
+        res.json({ results });
       })
       .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
       });
+  });
 
-    // console.log("here");
+  router.get("/movie", (req, res) => {
+    return db.query(`SELECT title FROM movies
+    WHERE id IN (SELECT session.movie_id FROM users
+    JOIN session ON users.id = user_id WHERE users.id = 1);`)
+      .then(data => {
+        const results = data.rows;
+        res.json({ results });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  router.get("/product", (req, res) => {
+    return db.query(`SELECT name FROM products
+    WHERE id IN (SELECT session.product_id FROM users
+    JOIN session ON users.id = user_id WHERE users.id = 1);`)
+      .then(data => {
+        const results = data.rows;
+        console.log(results);
+        res.json({ results });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  router.get("/restaurant", (req, res) => {
+    return db.query(`SELECT name FROM restaurants
+    WHERE id IN (SELECT session.restaurant_id FROM users
+    JOIN session ON users.id = user_id WHERE users.id = 1);`)
+      .then(data => {
+        const results = data.rows;
+        res.json({ results });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
 
   router.post("/", async (req, res) => {
@@ -49,24 +94,24 @@ module.exports = (db) => {
     }
     apiResponseMoviesRaw = await parseMovieData();
 
-    function parseFoodData() {
-      return new Promise((resolve, reject) => {
-        request({
-          url: `https://api.brandfetch.io/v2/brands/${sanitizeFoodBusinessQuery(req.body.movie)}.com`,
-          method: 'GET',
-          headers: { 'Authorization': 'Bearer pAfXYuJYJLCanSk1voTNaoyqJxnYtyGybku75eSeKI0=' },
-        },
-          (error, response, body) => {
-            if (error) {
-              reject(error)
-            } else {
-              return resolve(JSON.parse(body))
-            }
-          })
-      })
-    }
+    // function parseFoodData() {
+    //   return new Promise((resolve, reject) => {
+    //     request({
+    //       url: `https://api.brandfetch.io/v2/brands/${sanitizeFoodBusinessQuery(req.body.movie)}.com`,
+    //       method: 'GET',
+    //       headers: { 'Authorization': 'Bearer pAfXYuJYJLCanSk1voTNaoyqJxnYtyGybku75eSeKI0=' },
+    //     },
+    //       (error, response, body) => {
+    //         if (error) {
+    //           reject(error)
+    //         } else {
+    //           return resolve(JSON.parse(body))
+    //         }
+    //       })
+    //   })
+    // }
 
-    apiResponseRestaurantsRaw = await parseFoodData();
+    // apiResponseRestaurantsRaw = await parseFoodData();
 
     function parseBooksData() {
       return new Promise((resolve, reject) => {
@@ -82,10 +127,10 @@ module.exports = (db) => {
     apiResponseBooksRaw = await parseBooksData();
 
     console.log(apiResponseMoviesRaw);
-    console.log(apiResponseRestaurantsRaw);
+    // console.log(apiResponseRestaurantsRaw);
     console.log(apiResponseBooksRaw);
     console.log(sanitizeMovieQuery(req.body.movie))
-    console.log(sanitizeFoodBusinessQuery(req.body.movie))
+    // console.log(sanitizeFoodBusinessQuery(req.body.movie))
     console.log(sanitizeBookAndAuthorQuery(req.body.movie))
 
   })
