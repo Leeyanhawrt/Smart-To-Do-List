@@ -52,7 +52,13 @@ function sanitizeFoodBusinessQuery(userInput) {
   return sanitizeFoodBusinessString
 }
 
+function sanitizeBookAndAuthorQuery(userInput) {
+  const sanitizeBookOrAuthorString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "+");
+  return sanitizeBookOrAuthorString
+}
+
 module.exports = {
+  sanitizeBookAndAuthorQuery,
   sanitizeMovieQuery,
   sanitizeFoodBusinessQuery
 };

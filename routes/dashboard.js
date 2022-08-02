@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request')
-const { sanitizeMovieQuery, sanitizeFoodBusinessQuery } = require('../public/scripts/helpers')
-
+const { sanitizeMovieQuery, sanitizeFoodBusinessQuery, sanitizeBookAndAuthorQuery } = require('../public/scripts/helpers')
+const objdata = {}
 
 
 module.exports = (db) => {
@@ -31,11 +31,28 @@ module.exports = (db) => {
             headers: { 'Authorization': 'Bearer pAfXYuJYJLCanSk1voTNaoyqJxnYtyGybku75eSeKI0=' },
           },
             (error, response, body) => {
-              return JSON.parse(body)
+              if (error) {
+                res.send('Please provide a valid search option')
+              } else {
+                return res.send(body)
+              }
             })
         } else {
           return res.send(body)
         }
+      })
+      .then(body => {
+        if (body.name === "null") {
+          res.send('YES')
+        }
+          // res.send('Yes')
+          // return request(`https://www.googleapis.com/books/v1/volumes?q=${sanitizedBookQuery}&key=AIzaSyADHzbY7CBGfxvALFDuOC6R4OenddipLBM`, (error, response, body) => {
+            // if (error) {
+              // res.send(error)
+            // } else {
+              // res.send(body)
+            // }
+          // })
       })
       .catch(error => {
         res.send('didnt work')
