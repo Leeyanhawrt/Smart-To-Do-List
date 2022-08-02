@@ -42,6 +42,27 @@
 //   return booksQueryObject;
 // }
 
+function sanitizeMovieQuery(userInput) {
+  const sanitizedMovieString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "%20");
+  return sanitizedMovieString
+}
+
+function sanitizeFoodBusinessQuery(userInput) {
+  const sanitizeFoodBusinessString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "");
+  return sanitizeFoodBusinessString
+}
+
+function sanitizeBookAndAuthorQuery(userInput) {
+  const sanitizeBookOrAuthorString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "+");
+  return sanitizeBookOrAuthorString
+}
+
+module.exports = {
+  sanitizeBookAndAuthorQuery,
+  sanitizeMovieQuery,
+  sanitizeFoodBusinessQuery
+};
+
 // module.exports = {
 //   sanitizeMovieQuery,
 //   sanitizeBookAndAuthorQuery,

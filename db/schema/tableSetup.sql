@@ -11,7 +11,6 @@ CREATE TABLE users (
   password VARCHAR(255) NOT NULL
 );
 
-
 CREATE TABLE movies (
   id SERIAL PRIMARY KEY NOT NULL,
   title VARCHAR(255) NOT NULL,
