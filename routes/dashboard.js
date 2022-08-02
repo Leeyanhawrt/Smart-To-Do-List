@@ -1,12 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const request = require('request')
-const { sanitizeMovieQuery, sanitizeFoodBusinessQuery, sanitizeBookAndAuthorQuery } = require('../public/scripts/helpers')
-const objdata = {}
+const request = require('request');
+const { sanitizeMovieQuery, sanitizeFoodBusinessQuery, sanitizeBookAndAuthorQuery } = require('../public/scripts/helpers');
 
-let apiResponseMoviesRaw
-let apiResponseRestaurantsRaw
-let apiResponseBooksRaw
+//API KEYS from .env file
+//Keys are KEY1 for movie API, KEY2 for restaurants API and KEY3 for Books API
+
+//temp variables that hold the respective api response in JSON format
+let apiResponseMoviesJSON;
+let apiResponseRestaurantsJSON;
+let apiResponseBooksJSON;
+
+let apiResponseMoviesArray = [];
+let apiResponseRestaurantsArray = [];
+let apiResponseBooksArray = [];
 
 let addItemToMoviesList = false;
 let addItemToBooksList = false;
@@ -16,29 +23,27 @@ let addItemToProductsList = false;
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    // console.log("before db query");
-    // console.log(db);
+    console.log("before db query");
+    console.log(db);
     return db.query(`SELECT title FROM books WHERE id IN (SELECT session.book_id FROM users JOIN session ON users.id = user_id WHERE users.id = 1);`)
-    .then(data => {
-      // console.log("after db query");
-      const tempVar = data.rows;
-      console.log(tempVar);
-      res.render("dashboard",tempVar);
-        // res.json({ users });
+      .then(data => {
+        console.log("after db query");
+        const tempVar = data.rows[0];
+        console.log(tempVar);
+        res.render("dashboard", tempVar);
       })
       .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
       });
-
-    // console.log("here");
   });
 
+  console.log("Before router POST and running API GET calls");
   router.post("/", async (req, res) => {
     function parseMovieData() {
       return new Promise((resolve, reject) => {
-        request(`https://www.omdbapi.com/?t=${sanitizeMovieQuery(req.body.movie)}&apikey=a6b04247`, (error, response, body) => {
+        request(`https://www.omdbapi.com/?t=${sanitizeMovieQuery(req.body.movie)}&apikey=${process.env.DB_KEY1}`, (error, response, body) => {
           if (error) {
             return reject(error)
           } else {
@@ -47,14 +52,15 @@ module.exports = (db) => {
         })
       })
     }
-    apiResponseMoviesRaw = await parseMovieData();
+    apiResponseMoviesJSON = await parseMovieData();
+    apiResponseMoviesArray.push(apiResponseMoviesJSON.Title);
 
     function parseFoodData() {
       return new Promise((resolve, reject) => {
         request({
           url: `https://api.brandfetch.io/v2/brands/${sanitizeFoodBusinessQuery(req.body.movie)}.com`,
           method: 'GET',
-          headers: { 'Authorization': 'Bearer pAfXYuJYJLCanSk1voTNaoyqJxnYtyGybku75eSeKI0=' },
+          headers: { 'Authorization': `Bearer ${process.env.DB_KEY2}` },
         },
           (error, response, body) => {
             if (error) {
@@ -66,11 +72,12 @@ module.exports = (db) => {
       })
     }
 
-    apiResponseRestaurantsRaw = await parseFoodData();
+    apiResponseRestaurantsJSON = await parseFoodData();
+    apiResponseRestaurantsArray.push(apiResponseRestaurantsJSON.name);
 
     function parseBooksData() {
       return new Promise((resolve, reject) => {
-        request(`https://www.googleapis.com/books/v1/volumes?q=${sanitizeBookAndAuthorQuery(req.body.movie)}&key=AIzaSyADHzbY7CBGfxvALFDuOC6R4OenddipLBM`, (error, response, body) => {
+        request(`https://www.googleapis.com/books/v1/volumes?q=${sanitizeBookAndAuthorQuery(req.body.movie)}&key=${process.env.DB_KEY3}`, (error, response, body) => {
           if (error) {
             reject(error)
           } else {
@@ -79,14 +86,29 @@ module.exports = (db) => {
         })
       })
     }
-    apiResponseBooksRaw = await parseBooksData();
 
-    console.log(apiResponseMoviesRaw);
-    console.log(apiResponseRestaurantsRaw);
-    console.log(apiResponseBooksRaw);
-    console.log(sanitizeMovieQuery(req.body.movie))
-    console.log(sanitizeFoodBusinessQuery(req.body.movie))
-    console.log(sanitizeBookAndAuthorQuery(req.body.movie))
+    apiResponseBooksJSON = await parseBooksData();
+    apiResponseBooksArray.push(apiResponseBooksJSON.items[0].volumeInfo.title);
+
+    let bookItemsLength = apiResponseBooksJSON.items.length
+
+    console.log(apiResponseMoviesJSON);
+    console.log(apiResponseMoviesArray);
+    console.log(apiResponseRestaurantsJSON);
+    console.log(apiResponseRestaurantsArray);
+    console.log(apiResponseBooksJSON);
+    console.log(apiResponseBooksArray);
+    console.log(bookItemsLength);
+
+    // console.log(sanitizeMovieQuery(req.body.movie));
+    // console.log(sanitizeFoodBusinessQuery(req.body.movie));
+    // console.log(sanitizeBookAndAuthorQuery(req.body.movie));
+
+    //Logic notes for how to filter API data and determine category that needs insertion for database
+    //if api body for restaurant search does not have logos/links or the name/desciprion is null/undefined then its not a company
+    //if api body for books has an items length less than 0 (not many books) then it is not a real book
+    //if movie api returns an error saying movie not found, it is not a movie
+    //if all criteria above is somehow not met, then it is a product (can default to product since user can change category
 
   })
   return router;
