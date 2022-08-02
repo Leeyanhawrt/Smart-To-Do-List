@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable eqeqeq */
+/* eslint-disable func-style */
 // Client facing scripts here
 //API INFORMATION
 //MOVIES            - https://www.omdbapi.com/
@@ -12,18 +15,18 @@
 //function to sanitize the users input using regex into correct format for API use
 function sanitizeMovieQuery(userInput) {
   const sanitizedMovieString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "%20");
-  return sanitizedMovieString
+  return sanitizedMovieString;
 }
 //function to sanitize the users book and author inputs using regex into correct format for API use
 function sanitizeBookAndAuthorQuery(userInput) {
   const sanitizeBookOrAuthorString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "+");
-  return sanitizeBookOrAuthorString
+  return sanitizeBookOrAuthorString;
 }
 
 //function to sanitize the users restaurant/cafe input using regex into correct format for API use
 function sanitizeFoodBusinessQuery(userInput) {
   const sanitizeFoodBusinessString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "");
-  return sanitizeFoodBusinessString
+  return sanitizeFoodBusinessString;
 }
 
 //function to handle the movies user query and corresponding api request response data and convert into temporary object
@@ -68,7 +71,7 @@ function apiFoodBusinessQueryToObject(apiResponseData) {
 
 /******************************************************* DOM EVENTS ***************************************************************/
 //Starting the client side javascript with the document.ready so that DOM is loaded and ready
-$(document).ready(function () {
+$(document).ready(function() {
 
   //setting temporary jQuery variables that monitor different button elements on page
   const $registrationForm = $('.registration-form');
@@ -78,7 +81,7 @@ $(document).ready(function () {
   const $booksForm = $('.books-form');
 
   //Event handler for when the movies button is submitted
-  $moviesForm.submit(function (event) {
+  $moviesForm.submit(function(event) {
     event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
 
     //jQuery variable that takes the users movie query input and stores into variable
@@ -99,7 +102,7 @@ $(document).ready(function () {
         $.ajax({
           type: "GET",
           url: `https://www.omdbapi.com/?t=${sanitizedMovieQuery}&apikey=a6b04247`,
-          success: function (data) {
+          success: function(data) {
             const currentMovieObject = apiMoviesQueryToObject(data);
             // for (const [key, value] of Object.entries(currentMovieObject)) {
             //   console.log(`${key}: ${value}`);
@@ -115,7 +118,7 @@ $(document).ready(function () {
             // console.log("RUNTIME", data.Runtime);
             // console.log("TYPE", data.Type);
           },
-          error: function (xhr, exception) {
+          error: function(xhr, exception) {
             let msg = '';
             if (xhr.status === 0) {
               msg = 'Not connect.\n Verify Network.';
@@ -135,8 +138,8 @@ $(document).ready(function () {
             reject(xhr.status);
             // console.log(msg);
           }
-        })
-      })
+        });
+      });
     }
 
     apiMovieRequest()
@@ -154,12 +157,12 @@ $(document).ready(function () {
         // })
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
       });
-  })
+  });
 
   //Event handler for when the restaurants button is submitted
-  $restaurantsForm.submit(function (event) {
+  $restaurantsForm.submit(function(event) {
     event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
 
     //jQuery variable that takes the users restaurant/cafe query input and stores into variable
@@ -175,10 +178,10 @@ $(document).ready(function () {
     $.ajax({
       url: `https://api.brandfetch.io/v2/brands/${sanitizedFoodBusinessQuery}.com`,
       type: 'GET',
-      beforeSend: function (xhr) {
+      beforeSend: function(xhr) {
         xhr.setRequestHeader('Authorization', 'Bearer pAfXYuJYJLCanSk1voTNaoyqJxnYtyGybku75eSeKI0=');
       },
-      success: function (data) {
+      success: function(data) {
         console.log(data);
         const foodBusinessQueryObject = {
           "NAME": data.name,
@@ -192,7 +195,7 @@ $(document).ready(function () {
           console.log(`${key}: ${value}`);
         }
       },
-      error: function (xhr, exception) {
+      error: function(xhr, exception) {
         let msg = '';
         if (xhr.status === 0) {
           msg = 'Not connect.\n Verify Network.';
@@ -215,7 +218,7 @@ $(document).ready(function () {
     });
 
     //Event handler for when the products button is submitted
-    $productsForm.submit(function (event) {
+    $productsForm.submit(function(event) {
       event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
 
       const queryString = "";
@@ -223,10 +226,10 @@ $(document).ready(function () {
       $.ajax({
         type: "GET",
         url: ``,
-        success: function (data) {
+        success: function(data) {
           console.log(data);
         },
-        error: function (xhr, exception) {
+        error: function(xhr, exception) {
           let msg = '';
           if (xhr.status === 0) {
             msg = 'Not connect.\n Verify Network.';
@@ -246,11 +249,11 @@ $(document).ready(function () {
           console.log(xhr.status);
           console.log(msg);
         },
-      })
-    })
+      });
+    });
 
     //Event handler for when the books button is submitted
-    $booksForm.submit(function (event) {
+    $booksForm.submit(function(event) {
       event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
 
       //jQuery variable that takes the users book and author query input and stores into variables
@@ -273,7 +276,7 @@ $(document).ready(function () {
       $.ajax({
         type: "GET",
         url: `https://www.googleapis.com/books/v1/volumes?q=${sanitizedBookQuery}+inauthor:${sanitizedAuthorQuery}&key=AIzaSyADHzbY7CBGfxvALFDuOC6R4OenddipLBM`,
-        success: function (data) {
+        success: function(data) {
           const currentBookObject = apiBooksQueryToObject(data);
           console.log(currentBookObject);
           for (const [key, value] of Object.entries(currentBookObject)) {
@@ -287,7 +290,7 @@ $(document).ready(function () {
           // console.log("PUBLISHER:", data.items[0].volumeInfo.publisher);
           // console.log("PUBLISH DATE:", data.items[0].volumeInfo.publishedDate);
         },
-        error: function (xhr, exception) {
+        error: function(xhr, exception) {
           let msg = '';
           if (xhr.status === 0) {
             msg = 'Not connect.\n Verify Network.';
@@ -307,8 +310,8 @@ $(document).ready(function () {
           console.log(xhr.status);
           console.log(msg);
         },
-      })
-    })
-  })
+      });
+    });
+  });
 });
 /******************************************************* DOM EVENTS ***************************************************************/

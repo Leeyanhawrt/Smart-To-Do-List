@@ -8,7 +8,39 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   username VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL
-)
+);
+
+
+CREATE TABLE movies (
+  id SERIAL PRIMARY KEY NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  genre VARCHAR(255),
+  duration VARCHAR(255),
+  thumbnail TEXT
+);
+
+CREATE TABLE books (
+  id SERIAL PRIMARY KEY NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  author VARCHAR(255),
+  genre VARCHAR(255),
+  published DATE,
+  pages INTEGER
+);
+
+CREATE TABLE restaurants (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  type VARCHAR(255),
+  rating INTEGER
+);
+
+CREATE TABLE products (
+  id SERIAL PRIMARY KEY NOT NULL,
+  type VARCHAR(255),
+  name VARCHAR(255) NOT NULL,
+  PRICE INTEGER
+);
 
 CREATE TABLE session (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -17,41 +49,5 @@ CREATE TABLE session (
   product_id INTEGER REFERENCES products(id) ON DELETE CASCADE,
   resaurant_id INTEGER REFERENCES restaurants(id) ON DELETE CASCADE,
   movie_id INTEGER REFERENCES movies(id) ON DELETE CASCADE
-)
-
-CREATE TABLE movies (
-  id SERIAL PRIMARY KEY NOT NULL,
-  title VARCHAR(255) NOT NULL,
-  genre VARCHAR(255),
-  duration VARCHAR(255),
-  thumbnail TEXT,
-  session_id INTEGER REFERENCES session(id) ON DELETE CASCADE
-)
-
-CREATE TABLE books (
-  id SERIAL PRIMARY KEY NOT NULL,
-  title VARCHAR(255) NOT NULL,
-  author VARCHAR(255),
-  genre VARCHAR(255),
-  published DATE,
-  pages INTEGER,
-  session_id INTEGER REFERENCES session(id) ON DELETE CASCADE
-)
-
-CREATE TABLE restaurants (
-  id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255) NOT NULL,
-  type VARCHAR(255),
-  rating INTEGER,
-  session_id INTEGER REFERENCES session(id) ON DELETE CASCADE
-)
-
-CREATE TABLE products (
-  id SERIAL PRIMARY KEY NOT NULL,
-  type VARCHAR(255),
-  name VARCHAR(255) NOT NULL,
-  PRICE INTEGER,
-  session_id INTEGER REFERENCES session(id) ON DELETE CASCADE
-)
-
+);
 
