@@ -79,13 +79,15 @@ $(document).ready(function () {
 
   //Event handler for when the movies button is submitted
   $moviesForm.submit(function (event) {
-    event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
+    // event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
 
     //jQuery variable that takes the users movie query input and stores into variable
     const $movieInputFromUser = $('#movie-query').val();
 
     //storing the user input into new variable by running it as parameter in sanitize function
     const sanitizedMovieQuery = sanitizeMovieQuery($movieInputFromUser);
+
+    module.exports = (sanitizedMovieQuery)
 
     // console.log($movieInputFromUser);
     // console.log(sanitizedMovieQuery);

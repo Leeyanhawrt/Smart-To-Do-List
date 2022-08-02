@@ -42,6 +42,15 @@
 //   return booksQueryObject;
 // }
 
+function sanitizeMovieQuery(userInput) {
+  const sanitizedMovieString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "%20");
+  return sanitizedMovieString
+}
+
+module.exports = {
+  sanitizeMovieQuery
+};
+
 // module.exports = {
 //   sanitizeMovieQuery,
 //   sanitizeBookAndAuthorQuery,

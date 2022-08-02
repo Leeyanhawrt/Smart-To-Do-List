@@ -1,5 +1,9 @@
 const express = require('express');
 const router  = express.Router();
+const request = require('request')
+const { sanitizeMovieQuery } = require('../public/scripts/helpers')
+
+
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -7,8 +11,25 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    res.redirect("/home"); //should redirect to home page with login,not sure the urls yet
-  });
+    function parseData () {
+      return new Promise((resolve, reject) => {
+        request(`https://www.omdbapi.com/?t=${sanitizeMovieQuery(req.body.movie)}&apikey=a6b04247`, (error, response, body) => {
+          if (error) {
+            return reject(error)
+          } else {
+            return resolve(body)
+          }
+      })
+    })
+  }
+  parseData()
+  .then(body => {
+    res.send(body)
+  })
+  .catch(error => {
+    res.send(error)
+  })
+ })
 
   return router;
 };
