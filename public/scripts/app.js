@@ -87,8 +87,6 @@ $(document).ready(function () {
     //storing the user input into new variable by running it as parameter in sanitize function
     const sanitizedMovieQuery = sanitizeMovieQuery($movieInputFromUser);
 
-    module.exports = (sanitizedMovieQuery)
-
     // console.log($movieInputFromUser);
     // console.log(sanitizedMovieQuery);
 

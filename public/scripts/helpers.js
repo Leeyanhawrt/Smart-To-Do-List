@@ -47,8 +47,14 @@ function sanitizeMovieQuery(userInput) {
   return sanitizedMovieString
 }
 
+function sanitizeFoodBusinessQuery(userInput) {
+  const sanitizeFoodBusinessString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "");
+  return sanitizeFoodBusinessString
+}
+
 module.exports = {
-  sanitizeMovieQuery
+  sanitizeMovieQuery,
+  sanitizeFoodBusinessQuery
 };
 
 // module.exports = {

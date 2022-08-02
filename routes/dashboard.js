@@ -1,7 +1,7 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const request = require('request')
-const { sanitizeMovieQuery } = require('../public/scripts/helpers')
+const { sanitizeMovieQuery, sanitizeFoodBusinessQuery } = require('../public/scripts/helpers')
 
 
 
@@ -11,7 +11,7 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    function parseData () {
+    function parseData() {
       return new Promise((resolve, reject) => {
         request(`https://www.omdbapi.com/?t=${sanitizeMovieQuery(req.body.movie)}&apikey=a6b04247`, (error, response, body) => {
           if (error) {
@@ -19,17 +19,28 @@ module.exports = (db) => {
           } else {
             return resolve(JSON.parse(body))
           }
+        })
       })
-    })
-  }
-  parseData()
-  .then(body => {
-    res.send(body)
+    }
+    parseData()
+      .then(body => {
+        if (body.Response === 'False') {
+          return request({
+            url: `https://api.brandfetch.io/v2/brands/${sanitizeFoodBusinessQuery(req.body.movie)}.com`,
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer pAfXYuJYJLCanSk1voTNaoyqJxnYtyGybku75eSeKI0=' },
+          },
+            (error, response, body) => {
+              return JSON.parse(body)
+            })
+        } else {
+          return res.send(body)
+        }
+      })
+      .catch(error => {
+        res.send('didnt work')
+      })
   })
-  .catch(error => {
-    res.send('Not a valid choice')
-  })
- })
 
   return router;
 };
