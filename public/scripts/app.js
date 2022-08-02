@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable eqeqeq */
+/* eslint-disable func-style */
 // Client facing scripts here
 //API INFORMATION
 //MOVIES            - https://www.omdbapi.com/
@@ -12,18 +15,18 @@
 //function to sanitize the users input using regex into correct format for API use
 function sanitizeMovieQuery(userInput) {
   const sanitizedMovieString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "%20");
-  return sanitizedMovieString
+  return sanitizedMovieString;
 }
 //function to sanitize the users book and author inputs using regex into correct format for API use
 function sanitizeBookAndAuthorQuery(userInput) {
   const sanitizeBookOrAuthorString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "+");
-  return sanitizeBookOrAuthorString
+  return sanitizeBookOrAuthorString;
 }
 
 //function to sanitize the users restaurant/cafe input using regex into correct format for API use
 function sanitizeFoodBusinessQuery(userInput) {
   const sanitizeFoodBusinessString = userInput.trim().replace(/[^a-zA-Z0-9]/g, " ").trim().replace(/ /g, "");
-  return sanitizeFoodBusinessString
+  return sanitizeFoodBusinessString;
 }
 
 //function to handle the movies user query and corresponding api request response data and convert into temporary object
@@ -68,7 +71,7 @@ function apiFoodBusinessQueryToObject(apiResponseData) {
 
 /******************************************************* DOM EVENTS ***************************************************************/
 //Starting the client side javascript with the document.ready so that DOM is loaded and ready
-$(document).ready(function () {
+$(document).ready(function() {
 
   //setting temporary jQuery variables that monitor different button elements on page
   const $registrationForm = $('.registration-form');
@@ -136,7 +139,7 @@ $(document).ready(function () {
   })
 
   //Event handler for when the restaurants button is submitted
-  $restaurantsForm.submit(function (event) {
+  $restaurantsForm.submit(function(event) {
     event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
 
     //jQuery variable that takes the users restaurant/cafe query input and stores into variable
