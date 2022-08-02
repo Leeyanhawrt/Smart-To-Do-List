@@ -17,14 +17,14 @@ module.exports = (db) => {
           if (error) {
             return reject(error)
           } else {
-            return resolve(body)
+            return resolve(JSON.parse(body))
           }
       })
     })
   }
   parseData()
   .then(body => {
-    res.send(body)
+    res.send(body.Title)
   })
   .catch(error => {
     res.send(error)
