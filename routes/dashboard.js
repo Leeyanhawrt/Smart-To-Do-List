@@ -24,10 +24,10 @@ module.exports = (db) => {
   }
   parseData()
   .then(body => {
-    res.send(body.Title)
+    res.send(body)
   })
   .catch(error => {
-    res.send(error)
+    res.send('Not a valid choice')
   })
  })
 
