@@ -85,3 +85,115 @@ body {
   text-align: center;
   word-break: break-word;
 }
+
+.listItem .editMovie{
+  background-color:skyblue;
+  color: #a2908d;
+  transition: 0.2s;
+  i{
+    color: #000000;
+  };
+}
+
+.listItem .deleteMovie{
+  background-color:salmon;
+  color: #a2908d;
+  transition: 0.2s;
+  i{
+    color: #000000;
+  };
+}
+
+.listItem .editMovie:hover {
+  background-color:#7f807d;
+  cursor: pointer;
+}
+
+.listItem .deleteMovie:hover {
+  background-color:#7f807d;
+  cursor: pointer;
+}
+
+.listItem .editRestaurant{
+  background-color:skyblue;
+  color: #a2908d;
+  transition: 0.2s;
+  i{
+    color: #000000;
+  };
+}
+
+.listItem .deleteRestaurant{
+  background-color:salmon;
+  color: #a2908d;
+  transition: 0.2s;
+  i{
+    color: #000000;
+  };
+}
+
+.listItem .editRestaurant:hover {
+  background-color:#7f807d;
+  cursor: pointer;
+}
+
+.listItem .deleteRestaurant:hover {
+  background-color:#7f807d;
+  cursor: pointer;
+}
+
+.listItem .editProduct{
+  background-color:skyblue;
+  color: #a2908d;
+  transition: 0.2s;
+  i{
+    color: #000000;
+  };
+}
+
+.listItem .deleteProduct{
+  background-color:salmon;
+  color: #a2908d;
+  transition: 0.2s;
+  i{
+    color: #000000;
+  };
+}
+
+.listItem .editProduct:hover {
+  background-color:#7f807d;
+  cursor: pointer;
+}
+
+.listItem .deleteProduct:hover {
+  background-color:#7f807d;
+  cursor: pointer;
+}
+
+.listItem .editBook{
+  background-color:skyblue;
+  color: #a2908d;
+  transition: 0.2s;
+  i{
+    color: #000000;
+  };
+}
+
+.listItem .deleteBook{
+  background-color:salmon;
+  color: #a2908d;
+  transition: 0.2s;
+  i{
+    color: #000000;
+  };
+}
+
+.listItem .editBook:hover {
+  background-color:#7f807d;
+  cursor: pointer;
+}
+
+.listItem .deleteBook:hover {
+  background-color:#7f807d;
+  cursor: pointer;
+}
