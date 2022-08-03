@@ -15,10 +15,12 @@ let addItemToProductsList = false;
 
 module.exports = (db) => {
 
+
   router.get("/", (req, res) => {
     res.render("dashboard");
   });
 
+  //send data to each single url, so we can use those data in frontend
   router.get("/book", (req, res) => {
     return db.query(`SELECT title FROM books
     WHERE id IN (SELECT session.book_id FROM users
@@ -94,24 +96,24 @@ module.exports = (db) => {
     }
     apiResponseMoviesRaw = await parseMovieData();
 
-    // function parseFoodData() {
-    //   return new Promise((resolve, reject) => {
-    //     request({
-    //       url: `https://api.brandfetch.io/v2/brands/${sanitizeFoodBusinessQuery(req.body.movie)}.com`,
-    //       method: 'GET',
-    //       headers: { 'Authorization': 'Bearer pAfXYuJYJLCanSk1voTNaoyqJxnYtyGybku75eSeKI0=' },
-    //     },
-    //       (error, response, body) => {
-    //         if (error) {
-    //           reject(error)
-    //         } else {
-    //           return resolve(JSON.parse(body))
-    //         }
-    //       })
-    //   })
-    // }
+    function parseFoodData() {
+      return new Promise((resolve, reject) => {
+        request({
+          url: `https://api.brandfetch.io/v2/brands/${sanitizeFoodBusinessQuery(req.body.movie)}.com`,
+          method: 'GET',
+          headers: { 'Authorization': 'Bearer pAfXYuJYJLCanSk1voTNaoyqJxnYtyGybku75eSeKI0=' },
+        },
+          (error, response, body) => {
+            if (error) {
+              reject(error)
+            } else {
+              return resolve(JSON.parse(body))
+            }
+          })
+      })
+    }
 
-    // apiResponseRestaurantsRaw = await parseFoodData();
+    apiResponseRestaurantsRaw = await parseFoodData();
 
     function parseBooksData() {
       return new Promise((resolve, reject) => {
