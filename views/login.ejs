@@ -11,22 +11,17 @@
 
 <body>
   <%- include('partials/_header') %>
-  <h1>LOGIN</h1>
-  <main>
+  <main class="registerMain">
+    <h1 id="register">LOGIN</h1>
     <form action="/login" method="POST" class="login-form">
-      <div>
+      <div class="registerBox">
         <label for="email">Email Address:</label>
         <input type="email" name="email" />
-      </div>
-      <div>
         <label for="password">Password:</label>
         <input type="password" name="password" />
       </div>
-      <button type="submit" class="btn-register">Login</button>
+      <button type="submit" class="btn-register btn-secondary">Submit</button>
     </form>
-
-  </main>
-
 </body>
 
 </html>

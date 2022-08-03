@@ -14,55 +14,17 @@
 
 <body>
   <%- include('partials/_header') %>
-    <h1>DASHBOARD</h1>
     <main>
-
       <h3>
         <form action="/dashboard" method="POST" class="movies-form">
-          <label for="search-movie">Search Movie/Shows Here:</label>
-          <input type="text" name="movie" id="movie-query" />
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" name="movie" id="movie-query" placeholder="Search" />
+
           <div>
-            <button type="submit" class="btn-movies">Search Movies/Shows</button>
+            <button type="submit" class="btn-movies" placerholder="Add An Item">Submit</button>
           </div>
         </form>
       </h3>
-
-      <h3>
-        <form action="/dashboard" method="POST" class="restaurants-form">
-          <label for="search-restaurant">Search Restaurants Here:</label>
-          <input type="text" name="restaurant" id="restaurant-query" />
-          <div>
-            <button type="submit" class="btn-restaurants">Search Restaurants</button>
-          </div>
-        </form>
-      </h3>
-
-      <h3>
-        <form action="/dashboard" method="POST" class="products-form">
-          <label for="search-product">Search Product Here:</label>
-          <input type="text" name="product" id="product-query" />
-          <div>
-            <button type="submit" class="btn-products">Search Products</button>
-          </div>
-        </form>
-      </h3>
-
-      <h3>
-        <form action="/dashboard" method="POST" class="books-form">
-          <div>
-            <label for="search-book">Search Book Title Here:</label>
-            <input type="text" name="book" id="book-query" />
-          </div>
-          <div>
-            <label for="search-author">Search Book Author Here:</label>
-            <input type="text" name="author" id="author-query" />
-          </div>
-          <div>
-            <button type="submit" class="btn-books">Search Books</button>
-          </div>
-        </form>
-      </h3>
-
     </main>
 
     <section class="show_todo">

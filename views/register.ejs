@@ -5,27 +5,25 @@
   <title>REGISTER PAGE</title>
 
   <%- include('partials/_link') %>
-  <script type="text/javascript" src="/routes/register.js"></script>
+    <script type="text/javascript" src="/routes/register.js"></script>
 
 </head>
 
 <body>
   <%- include('partials/_header') %>
-  <h1>REGISTER</h1>
-  <main>
-    <form action="/register" method="POST" class="registration-form">
-      <div>
-        <label for="email">Email Address:</label>
-        <input type="email" name="email" />
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" name="password" />
-      </div>
-      <button type="submit" class="btn-register">Submit</button>
-    </form>
+    <main class="registerMain">
+      <h1 id="register">REGISTER</h1>
+      <form action="/register" method="POST" class="registration-form">
+        <div class="registerBox">
+          <label for="email">Email Address:</label>
+          <input type="email" name="email" />
+          <label for="password">Password:</label>
+          <input type="password" name="password" />
+        </div>
+        <button type="submit" class="btn-register btn-secondary">Submit</button>
+      </form>
 
-  </main>
+    </main>
 
 </body>
 
