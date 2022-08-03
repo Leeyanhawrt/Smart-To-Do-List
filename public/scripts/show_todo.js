@@ -3,15 +3,35 @@ $(document).ready(function () {
   // creat format list item with response list data
   const createListElement = function (listDataObj, listCategory) {
     const name = Object.keys(listDataObj);
-    const markup = "";
+    let markup = "";
     if (listCategory === 'movieList') {
-      markup = `<p class = "listItem"> ${listDataObj[name]} <button type = "DELETE" class = "deleteMovie"> <i class="fa-solid fa-circle-trash"></i></button></p> `;
+      markup = `<p class = "listItem"> ${listDataObj[name]}
+      <span>
+      <button type = "EDIT" class = "editMovie"> <i class="fa-solid fa-pen-to-square"></i></button>
+      <button type = "DELETE" class = "deleteMovie">  <i class="fa-solid fa-trash-can"></i></button>
+      </span>
+      </p>`;
     } else if (listCategory === 'restaurantList') {
-      markup = `<p class = "listItem"> ${listDataObj[name]} <button type = "DELETE" class = "deleteRestaurant"> <i class="fa-solid fa-circle-trash"></i> </button></p> `;
+      markup = `<p class = "listItem"> ${listDataObj[name]}
+      <span>
+      <button type = "EDIT" class = "editRestaurant"> <i class="fa-solid fa-pen-to-square"></i> </button>
+      <button type = "DELETE" class = "deleteRestaurant"> <i class="fa-solid fa-trash-can"></i> </button>
+      </span>
+      </p>`;
     } else if (listCategory === 'productList') {
-      markup = `<p class = "listItem"> ${listDataObj[name]} <button type = "DELETE" class = "deleteProduct"> <i class="fa-solid fa-circle-trash"></i> </button></p> `;
+      markup = `<p class = "listItem"> ${listDataObj[name]}
+      <span>
+      <button type = "EDIT" class = "editProduct"> <i class="fa-solid fa-pen-to-square"></i></button>
+      <button type = "DELETE" class = "deleteProduct"> <i class="fa-solid fa-trash-can"></i> </button>
+      </span>
+      </p> `;
     } else if (listCategory === 'bookList') {
-      markup = `<p class = "listItem"> ${listDataObj[name]} <button type = "DELETE" class = "deleteBook"> <i class="fa-solid fa-circle-trash"></i> </button></p> `;
+      markup = `<p class = "listItem"> ${listDataObj[name]}
+      <span>
+      <button type = "EDIT" class = "editBook"> <i class="fa-solid fa-pen-to-square"></i></button>
+      <button type = "DELETE" class = "deleteBook"> <i class="fa-solid fa-trash-can"></i> </button>
+      </span>
+      </p>`;
     }
     return markup;
   };
@@ -35,9 +55,7 @@ $(document).ready(function () {
 
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
+      console.log(err);
     });
 
   ////Perform AJAX GET request from local dashboard/movies route containing all movies pertaining to the user
@@ -48,9 +66,7 @@ $(document).ready(function () {
       renderListContent(json.results, "movieList");
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
+      console.log(err);
     });
 
   ////Perform AJAX GET request from local dashboard/product route containing all products pertaining to the user
@@ -60,12 +76,9 @@ $(document).ready(function () {
     .then((json) => {
       // console.log(json.results)
       renderListContent(json.results, "productList");
-
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
+      console.log(err);
     });
 
   ////Perform AJAX GET request from local dashboard/restaurant route containing all restaurants pertaining to the user
@@ -77,9 +90,7 @@ $(document).ready(function () {
 
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
+      console.log(err);
     });
 
 });

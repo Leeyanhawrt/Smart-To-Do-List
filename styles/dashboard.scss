@@ -72,3 +72,16 @@ body {
 .movies-form {
   width: 100%;
 }
+
+.listItem{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+.categoryTitle {
+  text-align: center;
+  word-break: break-word;
+}
