@@ -1,6 +1,6 @@
-document.ready(() => {
+$(document).ready(() => {
 
-  $('body').click(() => {
+  $('.fa-magnifying-glass').click(()=> {
     alert('works')
   })
 })
