@@ -20,69 +20,212 @@ $(document).ready(() => {
     }
   })
 
-  $(".fa-trash-can").click((e) =>  {
-    alert('worked')
-  })
 
-    // event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
+  $('body').on("click", (event) => {
+    $('.editMovie').on("click", (event) => {
+      event.preventDefault();
+      console.log(event.currentTarget.attributes.id.value);
+      let moviePK = event.currentTarget.attributes.id.value;
+      console.log(moviePK);
+      event.stopPropagation();
 
-    //jQuery variable that takes the users movie query input and stores into variable
-    const $movieInputFromUser = $('#movie-query').val();
-
-    //storing the user input into new variable by running it as parameter in sanitize function
-    const sanitizedMovieQuery = sanitizeMovieQuery($movieInputFromUser);
-
-    // console.log($movieInputFromUser);
-    // console.log(sanitizedMovieQuery);
-
-    // const queryMovie = "despicable%20me%202";
-
-
-
-    $("#fa-trash-can").click(function(e) {
-      e.preventDefault();
       $.ajax({
         type: "POST",
-        url: "/dashboard/test/",
+        url: "http://localhost:8080/dashboard/edit",
         data: {
           id: "DOES THIS WORK?",
         },
-        success: function(result) {
+        success: function (result) {
           alert('ok');
         },
-        error: function(result) {
+        error: function (result) {
           alert('error');
         }
       });
-    });
 
-    // $("#button_2").click(function(e) {
-    //   e.preventDefault();
-    //   $.ajax({
-    //     type: "POST",
-    //     url: "/pages/test/",
-    //     data: {
-    //       id: $("#button_2").val(),
-    //       access_token: $("#access_token").val()
-    //     },
-    //     success: function(result) {
-    //       alert('ok');
-    //     },
-    //     error: function(result) {
-    //       alert('error');
-    //     }
-    //   });
-    // });
+    })
+  })
 
+  $('body').on("click", (event) => {
+    $('.deleteMovie').on("click", (event) => {
+      event.preventDefault();
+      console.log(event.currentTarget.attributes.id.value);
+      let moviePK = event.currentTarget.attributes.id.value;
+      console.log(moviePK);
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/dashboard/delete",
+        data: {
+          id: "DOES THIS WORK?",
+        },
+        success: function (result) {
+          alert('ok');
+        },
+        error: function (result) {
+          alert('error');
+        }
+      });
+      event.stopPropagation();
+    })
+  })
 
+  $('body').on("click", (event) => {
+    $('.editRestaurant').on("click", (event) => {
+      event.preventDefault();
+      console.log(event.currentTarget.attributes.id.value);
+      let restaurantPK = event.currentTarget.attributes.id.value;
+      console.log(restaurantPK);
+      // $.ajax({
+      //   type: "POST",
+      //   url: "/dashboard/test/",
+      //   data: {
+      //     id: "DOES THIS WORK?",
+      //   },
+      //   success: function (result) {
+      //     alert('ok');
+      //   },
+      //   error: function (result) {
+      //     alert('error');
+      //   }
+      // });
+      event.stopPropagation();
+    })
+  })
 
+  $('body').on("click", (event) => {
+    $('.deleteRestaurant').on("click", (event) => {
+      event.preventDefault();
+      console.log(event.currentTarget.attributes.id.value);
+      let restaurantPK = event.currentTarget.attributes.id.value;
+      console.log(restaurantPK);
+      // $.ajax({
+      //   type: "POST",
+      //   url: "/dashboard/test/",
+      //   data: {
+      //     id: "DOES THIS WORK?",
+      //   },
+      //   success: function (result) {
+      //     alert('ok');
+      //   },
+      //   error: function (result) {
+      //     alert('error');
+      //   }
+      // });
+      event.stopPropagation();
+    })
+  })
 
+  $('body').on("click", (event) => {
+    $('.editProduct').on("click", (event) => {
+      event.preventDefault();
+      console.log(event.currentTarget.attributes.id.value);
+      let productPK = event.currentTarget.attributes.id.value;
+      console.log(productPK);
+      // $.ajax({
+      //   type: "POST",
+      //   url: "/dashboard/test/",
+      //   data: {
+      //     id: "DOES THIS WORK?",
+      //   },
+      //   success: function (result) {
+      //     alert('ok');
+      //   },
+      //   error: function (result) {
+      //     alert('error');
+      //   }
+      // });
+      event.stopPropagation();
+    })
+  })
 
+  $('body').on("click", (event) => {
+    $('.deleteProduct').on("click", (event) => {
+      event.preventDefault();
+      console.log(event.currentTarget.attributes.id.value);
+      let productPK = event.currentTarget.attributes.id.value;
+      console.log(productPK);
+      // $.ajax({
+      //   type: "POST",
+      //   url: "/dashboard/test/",
+      //   data: {
+      //     id: "DOES THIS WORK?",
+      //   },
+      //   success: function (result) {
+      //     alert('ok');
+      //   },
+      //   error: function (result) {
+      //     alert('error');
+      //   }
+      // });
+      event.stopPropagation();
+    })
+  })
 
+  $('body').on("click", (event) => {
+    $('.editBook').on("click", (event) => {
+      event.preventDefault();
+      console.log(event.currentTarget.attributes.id.value);
+      let bookPK = event.currentTarget.attributes.id.value;
+      console.log(bookPK);
+      // $.ajax({
+      //   type: "POST",
+      //   url: "/dashboard/test/",
+      //   data: {
+      //     id: "DOES THIS WORK?",
+      //   },
+      //   success: function (result) {
+      //     alert('ok');
+      //   },
+      //   error: function (result) {
+      //     alert('error');
+      //   }
+      // });
+      event.stopPropagation();
+    })
+  })
 
-
+  $('body').on("click", (event) => {
+    $('.deleteBook').on("click", (event) => {
+      event.preventDefault();
+      console.log(event.currentTarget.attributes.id.value);
+      let bookPK = event.currentTarget.attributes.id.value;
+      console.log(bookPK);
+      // $.ajax({
+      //   type: "POST",
+      //   url: "/dashboard/test/",
+      //   data: {
+      //     id: "DOES THIS WORK?",
+      //   },
+      //   success: function (result) {
+      //     alert('ok');
+      //   },
+      //   error: function (result) {
+      //     alert('error');
+      //   }
+      // });
+      event.stopPropagation();
+    })
+  })
 
 })
+
+//   const $registrationForm = $('.registration-form');
+//   const $moviesForm = $('.movies-form');
+//   const $restaurantsForm = $('.restaurants-form');
+//   const $productsForm = $('.products-form');
+//   const $booksForm = $('.books-form');
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

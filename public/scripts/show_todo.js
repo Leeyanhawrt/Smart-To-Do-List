@@ -7,29 +7,29 @@ $(document).ready(function () {
     if (listCategory === 'movieList') {
       markup = `<p class = "listItem"> ${listDataObj[name[0]]}
       <span>
-      <button type = "EDIT" class = "editMovie"><label class = "updateMovie">${listDataObj[name[1]]}</label><i class="fa-solid fa-pen-to-square"></i></button>
-      <button type = "DELETE" class = "deleteMovie"><label class = "updateMovie">${listDataObj[name[1]]}</label><i class="fa-solid fa-trash-can"></i></button>
+      <button type = "EDIT" class = "editMovie" id="${listDataObj[name[1]]}"><i class="fa-solid fa-pen-to-square"></i></button>
+      <button type = "DELETE" class = "deleteMovie" id="${listDataObj[name[1]]}"><i class="fa-solid fa-trash-can"></i></button>
       </span>
       </p>`;
     } else if (listCategory === 'restaurantList') {
       markup = `<p class = "listItem"> ${listDataObj[name[0]]}
       <span>
-      <button type = "EDIT" class = "editRestaurant"><label class = "updateRestaurant">${listDataObj[name[1]]}</label><i class="fa-solid fa-pen-to-square"></i> </button>
-      <button type = "DELETE" class = "deleteRestaurant"><label class = "updateRestaurant">${listDataObj[name[1]]}</label><i class="fa-solid fa-trash-can"></i> </button>
+      <button type = "EDIT" class = "editRestaurant" id="${listDataObj[name[1]]}"><i class="fa-solid fa-pen-to-square"></i></button>
+      <button type = "DELETE" class = "deleteRestaurant" id="${listDataObj[name[1]]}"><i class="fa-solid fa-trash-can"></i></button>
       </span>
       </p>`;
     } else if (listCategory === 'productList') {
       markup = `<p class = "listItem"> ${listDataObj[name[0]]}
       <span>
-      <button type = "EDIT" class = "editProduct"><label class = "updateProduct">${listDataObj[name[1]]}</label><i class="fa-solid fa-pen-to-square"></i></button>
-      <button type = "DELETE" class = "deleteProduct"><label class = "updateProduct">${listDataObj[name[1]]}</label><i class="fa-solid fa-trash-can"></i> </button>
+      <button type = "EDIT" class = "editProduct" id="${listDataObj[name[1]]}"><i class="fa-solid fa-pen-to-square"></i></button>
+      <button type = "DELETE" class = "deleteProduct" id="${listDataObj[name[1]]}"><i class="fa-solid fa-trash-can"></i></button>
       </span>
       </p> `;
     } else if (listCategory === 'bookList') {
       markup = `<p class = "listItem"> ${listDataObj[name[0]]}
       <span>
-      <button type = "EDIT" class = "editBook"><label class = "updateBook">${listDataObj[name[1]]}</label><i class="fa-solid fa-pen-to-square"></i></button>
-      <button type = "DELETE" class = "deleteBook"><label class = "updateBook">${listDataObj[name[1]]}</label><i class="fa-solid fa-trash-can"></i> </button>
+      <button type = "EDIT" class = "editBook" id="${listDataObj[name[1]]}"><i class="fa-solid fa-pen-to-square"></i></button>
+      <button type = "DELETE" class = "deleteBook" id="${listDataObj[name[1]]}"><i class="fa-solid fa-trash-can"></i></button>
       </span>
       </p>`;
     }
