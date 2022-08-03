@@ -40,6 +40,7 @@ body {
     position: absolute;
     margin-top: 0.5em;
     margin-left: 48.5em;
+    display: none;
   }
 
 }
@@ -57,3 +58,10 @@ body {
   cursor: pointer
 }
 
+.fa-circle-xmark:hover{
+  cursor: pointer;
+}
+
+.fa-magnifying-glass:hover{
+  cursor: pointer;
+}

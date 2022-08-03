@@ -1,7 +1,20 @@
 $(document).ready(() => {
 
-  $('.fa-magnifying-glass').click(()=> {
-    alert('works')
+  $('.fa-magnifying-glass').click(() => {
+    $('#movies-form').submit()
+  })
+
+  $('.fa-circle-xmark').click(() => {
+    $('#movie-query').val('')
+    $('.fa-circle-xmark').hide()
+  })
+
+  $('#movie-query').keydown(() => {
+    if ($('#movie-query').val().length === 0) {
+      $('.fa-circle-xmark').hide()
+    } else if ($('#movie-query').val().length > 0) {
+      $('.fa-circle-xmark').show()
+    }
   })
 })
 
