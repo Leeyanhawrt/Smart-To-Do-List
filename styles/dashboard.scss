@@ -1,5 +1,6 @@
 $nav-bar: #493657;
 $body-background: white;
+$background-color: #DFF3E3;
 
 body {
   font-size: 14px;
@@ -7,7 +8,7 @@ body {
 }
 
 .dashboardMain {
-  margin-top: 5em;
+  margin-top: 2em;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -21,6 +22,7 @@ body {
     width: 50em;
     height: 2em;
     padding-left: 2em;
+    padding-right: 2em;
   }
 
   form {
@@ -33,4 +35,25 @@ body {
     margin-top: 0.5em;
     margin-left: 0.5em;
   }
+
+  .fa-circle-xmark {
+    position: absolute;
+    margin-top: 0.5em;
+    margin-left: 48.5em;
+  }
+
 }
+
+.btn-light {
+ width: 100%;
+ transition: 0.4s;
+ font-family:'Mouse Memoirs', sans-serif;
+ text-align: left;
+ margin-top: 0.2em;
+}
+.btn-light:hover {
+  background-color: $nav-bar;
+  color: white;
+  cursor: pointer
+}
+
