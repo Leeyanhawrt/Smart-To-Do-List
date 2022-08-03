@@ -235,7 +235,7 @@ module.exports = (db) => {
 
   //Get title from table -> books where user_id = 1, then send results as json to frontend (dev user)
   router.get("/book", (req, res) => {
-    return db.query(`SELECT title FROM books
+    return db.query(`SELECT title, id FROM books
   WHERE id IN (SELECT session.book_id FROM users
   JOIN session ON users.id = user_id WHERE users.id = 1);`)
       .then(data => {
@@ -249,7 +249,7 @@ module.exports = (db) => {
 
   //Get title from table -> movie where user_id = 1, then send results as json to frontend (dev user)
   router.get("/movie", (req, res) => {
-    return db.query(`SELECT title FROM movies
+    return db.query(`SELECT title, id FROM movies
   WHERE id IN (SELECT session.movie_id FROM users
   JOIN session ON users.id = user_id WHERE users.id = 1);`)
       .then(data => {
@@ -263,7 +263,7 @@ module.exports = (db) => {
 
   //Get product name from table -> products where user_id = 1, then send results as json to frontend (dev user)
   router.get("/product", (req, res) => {
-    return db.query(`SELECT name FROM products
+    return db.query(`SELECT name, id FROM products
   WHERE id IN (SELECT session.product_id FROM users
   JOIN session ON users.id = user_id WHERE users.id = 1);`)
       .then(data => {
@@ -278,7 +278,7 @@ module.exports = (db) => {
 
   //Get restaurant name from table -> restaurants where user_id = 1, then send results as json to frontend (dev user)
   router.get("/restaurant", (req, res) => {
-    return db.query(`SELECT name FROM restaurants
+    return db.query(`SELECT name, id FROM restaurants
   WHERE id IN (SELECT session.restaurant_id FROM users
   JOIN session ON users.id = user_id WHERE users.id = 1);`)
       .then(data => {

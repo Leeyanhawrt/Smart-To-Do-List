@@ -84,6 +84,9 @@ body {
 .categoryTitle {
   text-align: center;
   word-break: break-word;
+  background-color:#f6eab1;
+  padding-top: 3%;
+  padding-bottom: 3%;
 }
 
 .listItem .editMovie{
@@ -93,6 +96,10 @@ body {
   i{
     color: #000000;
   };
+}
+
+.show_todo article {
+  background-color:#f6eab1
 }
 
 .listItem .deleteMovie{
@@ -196,4 +203,24 @@ body {
 .listItem .deleteBook:hover {
   background-color:#7f807d;
   cursor: pointer;
+}
+
+.updateMovie {
+  display: none;
+  color:#000000;
+}
+
+.updateRestaurant {
+  display: none;
+  color:#000000;
+}
+
+.updateProduct {
+  display: none;
+  color:#000000;
+}
+
+.updateBook {
+  display: none;
+  color:#000000;
 }

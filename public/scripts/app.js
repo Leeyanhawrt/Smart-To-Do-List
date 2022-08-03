@@ -1,14 +1,17 @@
 $(document).ready(() => {
 
+  // Provides search functionality to magnify glass
   $('.fa-magnifying-glass').click(() => {
     $('#movies-form').submit()
   })
 
+  // Adds x button to search bar
   $('.fa-circle-xmark').click(() => {
     $('#movie-query').val('')
     $('.fa-circle-xmark').hide()
   })
 
+  // Shows x button that clears text field if user interacts with it
   $('#movie-query').keydown(() => {
     if ($('#movie-query').val().length === 0) {
       $('.fa-circle-xmark').hide()
@@ -16,6 +19,69 @@ $(document).ready(() => {
       $('.fa-circle-xmark').show()
     }
   })
+
+  $(".fa-trash-can").click((e) =>  {
+    alert('worked')
+  })
+
+    // event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
+
+    //jQuery variable that takes the users movie query input and stores into variable
+    const $movieInputFromUser = $('#movie-query').val();
+
+    //storing the user input into new variable by running it as parameter in sanitize function
+    const sanitizedMovieQuery = sanitizeMovieQuery($movieInputFromUser);
+
+    // console.log($movieInputFromUser);
+    // console.log(sanitizedMovieQuery);
+
+    // const queryMovie = "despicable%20me%202";
+
+
+
+    $("#fa-trash-can").click(function(e) {
+      e.preventDefault();
+      $.ajax({
+        type: "POST",
+        url: "/dashboard/test/",
+        data: {
+          id: "DOES THIS WORK?",
+        },
+        success: function(result) {
+          alert('ok');
+        },
+        error: function(result) {
+          alert('error');
+        }
+      });
+    });
+
+    // $("#button_2").click(function(e) {
+    //   e.preventDefault();
+    //   $.ajax({
+    //     type: "POST",
+    //     url: "/pages/test/",
+    //     data: {
+    //       id: $("#button_2").val(),
+    //       access_token: $("#access_token").val()
+    //     },
+    //     success: function(result) {
+    //       alert('ok');
+    //     },
+    //     error: function(result) {
+    //       alert('error');
+    //     }
+    //   });
+    // });
+
+
+
+
+
+
+
+
+
 })
 
 
