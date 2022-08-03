@@ -1,8 +1,8 @@
 $(document).ready(() => {
 
-  $('body').click(() => {
-    alert('works')
-  })
+  // $('body').click(() => {
+  //   alert('works')
+  // })
 })
 
 
