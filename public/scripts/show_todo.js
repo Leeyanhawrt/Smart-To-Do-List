@@ -1,23 +1,32 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
   // creat format list item with response list data
-  const createListElement = function(listDataObj) {
+  const createListElement = function (listDataObj, listCategory) {
     const name = Object.keys(listDataObj);
-    const markup = `<p class = "listItem"> ${listDataObj[name]} <button type = "DELETE" class = "deleteButton"> ❌ </button></p> `;
+    const markup = "";
+    if (listCategory === 'movieList') {
+      markup = `<p class = "listItem"> ${listDataObj[name]} <button type = "DELETE" class = "deleteMovie"> <i class="fa-solid fa-circle-trash"></i></button></p> `;
+    } else if (listCategory === 'restaurantList') {
+      markup = `<p class = "listItem"> ${listDataObj[name]} <button type = "DELETE" class = "deleteRestaurant"> <i class="fa-solid fa-circle-trash"></i> </button></p> `;
+    } else if (listCategory === 'productList') {
+      markup = `<p class = "listItem"> ${listDataObj[name]} <button type = "DELETE" class = "deleteProduct"> <i class="fa-solid fa-circle-trash"></i> </button></p> `;
+    } else if (listCategory === 'bookList') {
+      markup = `<p class = "listItem"> ${listDataObj[name]} <button type = "DELETE" class = "deleteBook"> <i class="fa-solid fa-circle-trash"></i> </button></p> `;
+    }
     return markup;
   };
 
-  const renderListContent = function(listDataArr, listCategory) {
+  const renderListContent = function (listDataArr, listCategory) {
 
     //clear container before append
     $(`#${listCategory}`).empty();
     for (const listDataObj of listDataArr) {
-      const $content = createListElement(listDataObj);
-      $(`#${listCategory}`).append($content);
+      const $content = createListElement(listDataObj, listCategory);
+      $(`#${listCategory}`).prepend($content);
     }
   };
 
-
+  //Perform AJAX GET request from local dashboard/book route containing all books pertaining to the user
   $.ajax({
     url: '/dashboard/book',
   })
@@ -31,6 +40,7 @@ $(document).ready(function() {
         .json({ error: err.message });
     });
 
+  ////Perform AJAX GET request from local dashboard/movies route containing all movies pertaining to the user
   $.ajax({
     url: '/dashboard/movie',
   })
@@ -43,6 +53,7 @@ $(document).ready(function() {
         .json({ error: err.message });
     });
 
+  ////Perform AJAX GET request from local dashboard/product route containing all products pertaining to the user
   $.ajax({
     url: '/dashboard/product',
   })
@@ -57,6 +68,7 @@ $(document).ready(function() {
         .json({ error: err.message });
     });
 
+  ////Perform AJAX GET request from local dashboard/restaurant route containing all restaurants pertaining to the user
   $.ajax({
     url: '/dashboard/restaurant',
   })

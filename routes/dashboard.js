@@ -26,45 +26,76 @@ let addItemToProductsList;
 
 //function to insert into db based on type of insertion
 
-
 module.exports = (db) => {
 
   function getArrayForDatabase() {
     if (addItemToMoviesList) {
-      // console.log(addItemToMoviesList);
-      // with i as(INSERT INTO movies (title, genre, duration, thumbnail) VALUES ($1, NULL, NULL, NULL) returning id),
-      // a as(INSERT INTO session (
-      // movie_id) SELECT id FROM i) UPDATE session SET user_id = 1 WHERE movie_id = (SELECT id FROM i);
       console.log(apiResponseMoviesArray);
       console.log("This response is from function for movies insert into database");
       return db.query(`INSERT INTO movies (title) VALUES ($1) returning *;`, apiResponseMoviesArray)
         .then(data => {
-          console.log("+++++++", data.rows);
+          // console.log("+++++++", data.rows);
           const movie = data.rows[0];
-          return db.query(`INSERT INTO session (user_id, movie_id) VALUES ($1,$2) returning *;`, [1,movie.id])
-          .then (data =>{
-            console.log("-----------", data.rows);
-          })
+          return db.query(`INSERT INTO session (user_id, movie_id) VALUES ($1,$2) returning *;`, [1, movie.id])
+            .then(data => {
+              // console.log("-----------", data.rows);
+            })
         })
         .catch(err => {
           console.log(err);
         });
       // return apiResponseMoviesArray; //ONLY KEEP THIS WHEN WE ARE READY FOR INSERTION
     } else if (addItemToRestaurantsList) {
-      console.log(addItemToRestaurantsList);
+      // console.log(addItemToRestaurantsList);
       console.log(apiResponseRestaurantsArray);
-      console.log("This response is from function for restaurants insert into database");
-      return apiResponseRestaurantsArray; //ONLY KEEP THIS WHEN WE ARE READY FOR INSERTION
+      console.log("This response is from function for restaurant insert into database");
+      return db.query(`INSERT INTO restaurants (name) VALUES ($1) returning *;`, apiResponseRestaurantsArray)
+      .then(data => {
+        // console.log("+++++++", data.rows);
+        const restaurant = data.rows[0];
+        return db.query(`INSERT INTO session (user_id, restaurant_id) VALUES ($1,$2) returning *;`, [1, restaurant.id])
+          .then(data => {
+            // console.log("-----------", data.rows);
+          })
+      })
+      .catch(err => {
+        console.log(err);
+      });
+      // return apiResponseRestaurantsArray; //ONLY KEEP THIS WHEN WE ARE READY FOR INSERTION
     } else if (addItemToBooksList) {
-      console.log(addItemToBooksList);
+      // console.log(addItemToBooksList);
       console.log(apiResponseBooksArray);
       console.log("This response is from function for books insert into database");
-      return apiResponseBooksArray; //ONLY KEEP THIS WHEN WE ARE READY FOR INSERTION
+      return db.query(`INSERT INTO books (title) VALUES ($1) returning *;`, apiResponseBooksArray)
+      .then(data => {
+        // console.log("+++++++", data.rows);
+        const book = data.rows[0];
+        return db.query(`INSERT INTO session (user_id, book_id) VALUES ($1,$2) returning *;`, [1, book.id])
+          .then(data => {
+            // console.log("-----------", data.rows);
+          })
+      })
+      .catch(err => {
+        console.log(err);
+      });
+      // return apiResponseBooksArray; //ONLY KEEP THIS WHEN WE ARE READY FOR INSERTION
     } else if (addItemToProductsList) {
-      console.log(addItemToProductsList);
+      // console.log(addItemToProductsList);
       console.log(apiResponseProductsArray);
       console.log("This response is from function for products insert into database");
-      return apiResponseProductsArray; //ONLY KEEP THIS WHEN WE ARE READY FOR INSERTION
+      return db.query(`INSERT INTO products (name) VALUES ($1) returning *;`, apiResponseProductsArray)
+      .then(data => {
+        // console.log("+++++++", data.rows);
+        const product = data.rows[0];
+        return db.query(`INSERT INTO session (user_id, product_id) VALUES ($1,$2) returning *;`, [1, product.id])
+          .then(data => {
+            // console.log("-----------", data.rows);
+          })
+      })
+      .catch(err => {
+        console.log(err);
+      });
+      // return apiResponseProductsArray; //ONLY KEEP THIS WHEN WE ARE READY FOR INSERTION
     }
   }
 
@@ -202,6 +233,7 @@ module.exports = (db) => {
     res.redirect('/dashboard');
   })
 
+  //Get title from table -> books where user_id = 1, then send results as json to frontend (dev user)
   router.get("/book", (req, res) => {
     return db.query(`SELECT title FROM books
   WHERE id IN (SELECT session.book_id FROM users
@@ -215,6 +247,7 @@ module.exports = (db) => {
       });
   });
 
+  //Get title from table -> movie where user_id = 1, then send results as json to frontend (dev user)
   router.get("/movie", (req, res) => {
     return db.query(`SELECT title FROM movies
   WHERE id IN (SELECT session.movie_id FROM users
@@ -228,6 +261,7 @@ module.exports = (db) => {
       });
   });
 
+  //Get product name from table -> products where user_id = 1, then send results as json to frontend (dev user)
   router.get("/product", (req, res) => {
     return db.query(`SELECT name FROM products
   WHERE id IN (SELECT session.product_id FROM users
@@ -242,6 +276,7 @@ module.exports = (db) => {
       });
   });
 
+  //Get restaurant name from table -> restaurants where user_id = 1, then send results as json to frontend (dev user)
   router.get("/restaurant", (req, res) => {
     return db.query(`SELECT name FROM restaurants
   WHERE id IN (SELECT session.restaurant_id FROM users
