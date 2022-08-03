@@ -1,5 +1,5 @@
 $nav-bar: #493657;
-$body-background: #F1FAEE;
+$body-background: white;
 
 body {
   font-size: 14px;
@@ -12,7 +12,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 1%;
-  color: #F1FAEE;
+  color: $body-background;
 
   :nth-child(2n-1) {
     margin: 0% 5%
@@ -28,25 +28,65 @@ section {
     display: flex;
     justify-content: center;
     margin-top: 5%;
-    font-family: 'Square Peg', cursive;
-    font-weight: 800;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 900;
     font-size: 3rem;
+    color: #0C0C0C
   }
 
   div {
     display: flex;
-    justify-content: space-around;
-    margin-top: 3%;
+    justify-content: center;
+    gap: 2em;
+    margin: 3% 10%;
+
+    #benefit-1 {
+      h3 {
+        color: #CE7DA5;
+        font-weight: 900;
+      }
+    }
+
+    #benefit-2 {
+      h3 {
+        color: #BEE5BF;
+        font-weight: 900;
+      }
+    }
+
+    #benefit-3 {
+      h3 {
+        color: #FFD1BA;
+        font-weight: 900;
+        justify-self: flex-end;
+      }
+    }
 
     article {
-      font-family: 'Cormorant SC', serif;
-      font-size: 2em;
-      border: 1px solid black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: Sans-serif, serif;
+      justify-content: space-around;
+      font-size: 1.2em;
+      background-color: #F6F5F5;
+      padding: 1% 2% 5%;
+      flex-basis: 30%;
+      text-align: center;
 
-      padding: 1% 7% 20%;
-    }
-    h3 {
-      display: inline
+      h3 {
+        display: inline;
+        font-size: 1.4em;
+        margin-top: 5%;
+        margin-bottom: 10%
+      }
+
+      .benefitText {
+        font-size: 1.1rem;
+        color: #808080;
+        text-justify: inter-word;
+      }
+
     }
   }
 }
@@ -57,7 +97,7 @@ section {
   margin-top: 3%;
 }
 
-.show_todo{
+.show_todo {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -65,7 +105,37 @@ section {
   article {
     width: 20%;
     height: 100%;
-    border: 1px solid #493657;
-    background-color: #BEE5BF;
+    border: 1px solid $nav-bar;
+    background-color: $body-background;
   }
+}
+
+#projectName {
+  font-family: 'Mouse Memoirs', sans-serif;
+  font-size: 2em;
+  margin-top: 10px;
+}
+
+.navBar {
+  color: $body-background;
+}
+
+.btn-outline-warning {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-primary {
+  width: 20%;
+  height: 5em;
+ a {
+  color: white;
+  width: 100%;
+  font-size: 2em;
+ }
+}
+
+.fa-6x {
+  margin-top: 20%;
+  color: #808080;
 }
