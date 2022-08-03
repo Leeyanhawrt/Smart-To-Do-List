@@ -17,7 +17,7 @@ $(document).ready(function() {
     }
   };
 
-  
+
   $.ajax({
     url: '/dashboard/book',
   })

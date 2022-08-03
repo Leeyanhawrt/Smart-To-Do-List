@@ -15,14 +15,17 @@ body {
   align-items: center;
 
   button {
-    width: 50em;
+    width: 100%;
+    font-size: 3em;
+    padding-left: 1.8em;
   }
 
   input {
-    width: 50em;
+    width: 100%;
+    font-size: 3em;
     height: 2em;
-    padding-left: 2em;
-    padding-right: 2em;
+    padding-left: 1.8em;
+    padding-right: 2.2em;
   }
 
   form {
@@ -32,14 +35,14 @@ body {
 
   .fa-magnifying-glass {
     position: absolute;
-    margin-top: 0.5em;
-    margin-left: 0.5em;
+    margin-top: 0.6em;
+    margin-left: 0.4em;
   }
 
   .fa-circle-xmark {
     position: absolute;
     margin-top: 0.5em;
-    margin-left: 48.5em;
+    margin-left: 33em;
     display: none;
   }
 
@@ -64,4 +67,8 @@ body {
 
 .fa-magnifying-glass:hover{
   cursor: pointer;
+}
+
+.movies-form {
+  width: 100%;
 }

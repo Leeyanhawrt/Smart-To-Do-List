@@ -15,19 +15,16 @@
 <body>
   <%- include('partials/_header') %>
     <main class="dashboardMain">
-      <h3>
-
         <form action="/dashboard" method="POST" class="movies-form">
-          <div>
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <i class="fa-solid fa-circle-xmark"></i>
+          <div id="searchbar">
+            <i class="fa-solid fa-magnifying-glass fa-3x"></i>
+            <i class="fa-solid fa-circle-xmark fa-3x"></i>
             <input type="text" name="movie" id="movie-query" placeholder="Search" />
           </div>
           <div>
             <button type="submit" class="btn-movies btn-light" placerholder="Add An Item">Add a To-Do Item</button>
           </div>
         </form>
-      </h3>
     </main>
 
     <section class="show_todo">
