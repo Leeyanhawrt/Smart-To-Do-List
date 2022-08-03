@@ -1,41 +1,73 @@
-// $(document).ready(function() {
+$(document).ready(function() {
 
-//   // creat format list item with response list data
-//   const createListElement = function(listDataObj) {
+  // creat format list item with response list data
+  const createListElement = function(listDataObj) {
+    const name = Object.keys(listDataObj);
+    const markup = `<p class = "listItem"> ${listDataObj[name]} <button type = "DELETE" class = "deleteButton"> ❌ </button></p> `;
+    return markup;
+  };
 
-//     const markup = `<p> ${listDataObj.title} </p>`;
-//     return markup;
-//   };
+  const renderListContent = function(listDataArr, listCategory) {
 
-//   const renderListContent = function(listDataArr, listCategory) {
+    //clear container before append
+    $(`#${listCategory}`).empty();
+    for (const listDataObj of listDataArr) {
+      const $content = createListElement(listDataObj);
+      $(`#${listCategory}`).append($content);
+    }
+  };
 
-//     //clear container before append
-//     $(`#${listCategory}`).empty();
+  
+  $.ajax({
+    url: '/dashboard/book',
+  })
+    .then((json) => {
+      renderListContent(json.results, "bookList");
 
-//     for (const listDataObj of listDataArr) {
-//       const $content = createListElement(listDataObj);
-//       $(`#${listCategory}`).append($content);
-//     }
-//   };
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 
-//   const listContentBook = [{title: "book1" }, {title: "book2" }, {title: "book3" }, {title: "book4" }];
-//   const listContentMovie= [{title: "movie1" }, {title: "movie2" }, {title: "movie3" }, {title: "movie4" }];
-//   const listContentRestaurant = [{title: "restaurant1" }, {title: "restaurant2" }, {title: "restaurant3" }, {title: "restaurant4" }];
-//   const listContentProduct = [{title: "product1" }, {title: "product2" }, {title: "product3" }, {title: "product4" }];
+  $.ajax({
+    url: '/dashboard/movie',
+  })
+    .then((json) => {
+      renderListContent(json.results, "movieList");
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 
+  $.ajax({
+    url: '/dashboard/product',
+  })
+    .then((json) => {
+      // console.log(json.results)
+      renderListContent(json.results, "productList");
 
-//   // console.log(renderListContent(listContentExample1, "bookList"));
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 
-//   $.ajax({
-//     type: "GET",
-//     url: '/dashboard',
-//     success: (data) => {
-//       renderListContent(listContentBook, "bookList");
-//       renderListContent(listContentMovie, "movieList");
-//       renderListContent(listContentRestaurant, "restaurantList");
-//       renderListContent(listContentProduct, "productList");
-//     }
+  $.ajax({
+    url: '/dashboard/restaurant',
+  })
+    .then((json) => {
+      renderListContent(json.results, "restaurantList");
 
-//   });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 
-// });
+});
