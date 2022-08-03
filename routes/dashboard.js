@@ -32,14 +32,19 @@ module.exports = (db) => {
   function getArrayForDatabase() {
     if (addItemToMoviesList) {
       // console.log(addItemToMoviesList);
+      // with i as(INSERT INTO movies (title, genre, duration, thumbnail) VALUES ($1, NULL, NULL, NULL) returning id),
+      // a as(INSERT INTO session (
+      // movie_id) SELECT id FROM i) UPDATE session SET user_id = 1 WHERE movie_id = (SELECT id FROM i);
       console.log(apiResponseMoviesArray);
       console.log("This response is from function for movies insert into database");
-      return db.query(`with i as(INSERT INTO movies (title, genre, duration, thumbnail) VALUES ($1, NULL, NULL, NULL) returning id),
-      user as (SELECT id FROM users WHERE id = 1 returning id)
-      INSERT INTO session (user_id,
-      movie_id) SELECT user.id, i.id FROM i FULL JOIN user ON user.id;`, apiResponseMoviesArray)
+      return db.query(`INSERT INTO movies (title) VALUES ($1) returning *;`, apiResponseMoviesArray)
         .then(data => {
-          console.log(data);
+          console.log("+++++++", data.rows);
+          const movie = data.rows[0];
+          return db.query(`INSERT INTO session (user_id, movie_id) VALUES ($1,$2) returning *;`, [1,movie.id])
+          .then (data =>{
+            console.log("-----------", data.rows);
+          })
         })
         .catch(err => {
           console.log(err);
@@ -194,6 +199,7 @@ module.exports = (db) => {
     // console.log(sanitizeFoodBusinessQuery(req.body.movie));
     // console.log(sanitizeBookAndAuthorQuery(req.body.movie));
     //send data to each single url, so we can use those data in frontend
+    res.redirect('/dashboard');
   })
 
   router.get("/book", (req, res) => {
@@ -205,9 +211,7 @@ module.exports = (db) => {
         res.json({ results });
       })
       .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+        console.log(err);
       });
   });
 
@@ -220,9 +224,7 @@ module.exports = (db) => {
         res.json({ results });
       })
       .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+        console.log(err);
       });
   });
 
@@ -236,9 +238,7 @@ module.exports = (db) => {
         res.json({ results });
       })
       .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+        console.log(err);
       });
   });
 
@@ -251,9 +251,7 @@ module.exports = (db) => {
         res.json({ results });
       })
       .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+        console.log(err);
       });
   });
   return router;
