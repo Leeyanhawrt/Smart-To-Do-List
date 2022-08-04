@@ -177,3 +177,13 @@ display: none;
   .fa-house-chimney {
     color: white
   }
+
+  .signedIn {
+    display: flex;
+    align-items: center;
+    gap: 20%;
+
+     a:hover {
+      color: #290916;
+     }
+  }

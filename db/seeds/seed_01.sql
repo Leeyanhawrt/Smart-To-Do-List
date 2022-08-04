@@ -1,70 +1,70 @@
 INSERT INTO
   users (username, PASSWORD, imageURL)
 VALUES
-  ('user1', 'password','https://www.nicepng.com/png/detail/875-8759926_coolcat-sticker-mlg-cat-with-glasses.png'),
+  ('dev', 'password','https://www.nicepng.com/png/detail/875-8759926_coolcat-sticker-mlg-cat-with-glasses.png%27'),
+  ('user1', 'password',NULL),
   ('user2', 'password',NULL),
-  ('user3', 'password',NULL),
-  ('user4', 'password',NULL);
+  ('user3', 'password',NULL);
 
 INSERT INTO
   movies (name, genre, duration, thumbnail)
 VALUES
   (
-    'movie1',
-    'comedy',
-    '25 mins',
-    'link of thumbnail'
+    'Ghostbusters',
+    'Comedy',
+    '90 min',
+    'thumbnail.jpg'
   ),
   (
-    'movie2',
-    'comedy',
-    '25 mins',
-    'link of thumbnail'
+    'The Godfather',
+    'Drama',
+    '175 min',
+    'thumbnail.jpg'
   ),
   (
-    'movie3',
-    'comedy',
-    '25 mins',
-    'link of thumbnail'
+    'Inception',
+    'Action',
+    '148 min',
+    'thumbnail.jpg'
   );
 
 INSERT INTO
   books (name, author, genre, published, pages)
 VALUES
   (
-    'book1',
-    'some author',
-    'some genre',
-    '2012-02-06',
+    'The Lord of the Rings',
+    'J.R.R. Tolkien',
+    'Fantasy',
+    '2001-12-19',
+    1254
+  ),
+  (
+    'The Hobbit',
+    'J.R.R. Tolkien',
+    'Fantasy',
+    '2012-12-19',
+    1254
+  ),
+  (
+    'Macbeth',
+    'William Shakespeare',
+    'Drama',
+    '1606-01-01',
+    123
+  ),
+  (
+    'Hamlet',
+    'William Shakespeare',
+    'Drama',
+    '1606-01-01',
     35
   ),
   (
-    'book2',
-    'some author',
-    'some genre',
-    '2012-08-06',
-    35
-  ),
-  (
-    'book3',
-    'some author',
-    'some genre',
-    '2012-03-06',
-    35
-  ),
-  (
-    'book4',
-    'some author',
-    'some genre',
-    '2012-05-06',
-    35
-  ),
-  (
-    'book5',
-    'some author',
-    'some genre',
-    '2012-02-06',
-    35
+    'Fullmetal Alchemist',
+    'Hiromu Arakawa',
+    'Action',
+    '2009-01-01',
+    123
   );
 
 INSERT INTO
@@ -72,17 +72,16 @@ INSERT INTO
 VALUES
   ('Tim Hortons', 'food', 4),
   ('Pizza Pizza', 'food', 1),
-  ('Mcdonals', 'food', 3),
-  ('Tim Hortons', 'food', 5),
-  ('Tim Hortons', 'food', 4);
+  ('The Keg', 'food', 3),
+  ('Pizza Nova', 'food', 5),
+  ('Subway', 'food', 4);
 
 INSERT INTO
   products (TYPE, name, PRICE)
 VALUES
-  ('sport', 'bike', 3),
-  ('cloth', 'T-shirt', 3),
-  ('home', 'light', 3);
-
+  ('Work', 'Laptop', 3),
+  ('Sports', 'Bike', 3),
+  ('Supplies', 'Towels', 3);
 INSERT INTO
   SESSION (
     user_id,
