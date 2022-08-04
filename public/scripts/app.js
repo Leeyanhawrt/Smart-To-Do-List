@@ -20,10 +20,6 @@ $(document).ready(() => {
     }
   })
 
-  $(".fa-trash-can").click((e) =>  {
-    alert('worked')
-  })
-
     // event.preventDefault(); //will not submit the old fashioned way, we want to submit an ajax request instead
 
     //jQuery variable that takes the users movie query input and stores into variable
