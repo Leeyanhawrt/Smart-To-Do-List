@@ -1,7 +1,30 @@
+$nav-bar: #493657;
+$body-background: white;
+
 #profileHeader {
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .profileMain {
   display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#profileRight {
+display: flex;
+flex-direction: row;
+justify-content: center;
+gap: 10%;
+align-items: center;
+font-size: 2em;
+}
+
+.profile-submit {
+  width: 50%;
+  align-self: center;
+  height: 5em;
+  background-color: $nav-bar;
+  margin-top: 2em;
+  font-size: 1.5em;
 }

@@ -28,7 +28,7 @@ section {
     display: flex;
     justify-content: center;
     margin-top: 5%;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: 900;
     font-size: 3rem;
     color: #0C0C0C
@@ -129,11 +129,12 @@ section {
   width: 20%;
   height: 5em;
   margin-bottom: 5%;
- a {
-  color: white;
-  width: 100%;
-  font-size: 2em;
- }
+
+  a {
+    color: white;
+    width: 100%;
+    font-size: 2em;
+  }
 }
 
 .fa-6x {
@@ -142,10 +143,33 @@ section {
 }
 
 .btn-outline-warning {
-border: none;
+  border: none;
 }
 
 .fa-house-chimney:hover {
   color: gold;
   cursor: pointer;
+}
+
+#selectMove {
+  display: none;
+
+  #selectMoveBox {
+    display: flex;
+    margin-top: 3%;
+    gap: 0.8em;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5em;
+  }
+
+  #selections {
+    display: flex;
+    gap: 30%;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 1%;
+  }
 }

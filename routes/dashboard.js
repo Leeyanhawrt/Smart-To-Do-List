@@ -50,51 +50,51 @@ module.exports = (db) => {
       console.log(apiResponseRestaurantsArray);
       console.log("This response is from function for restaurant insert into database");
       return db.query(`INSERT INTO restaurants (name) VALUES ($1) returning *;`, apiResponseRestaurantsArray)
-      .then(data => {
-        // console.log("+++++++", data.rows);
-        const restaurant = data.rows[0];
-        return db.query(`INSERT INTO session (user_id, restaurant_id) VALUES ($1,$2) returning *;`, [1, restaurant.id])
-          .then(data => {
-            // console.log("-----------", data.rows);
-          })
-      })
-      .catch(err => {
-        console.log(err);
-      });
+        .then(data => {
+          // console.log("+++++++", data.rows);
+          const restaurant = data.rows[0];
+          return db.query(`INSERT INTO session (user_id, restaurant_id) VALUES ($1,$2) returning *;`, [1, restaurant.id])
+            .then(data => {
+              // console.log("-----------", data.rows);
+            })
+        })
+        .catch(err => {
+          console.log(err);
+        });
       // return apiResponseRestaurantsArray; //ONLY KEEP THIS WHEN WE ARE READY FOR INSERTION
     } else if (addItemToBooksList) {
       // console.log(addItemToBooksList);
       console.log(apiResponseBooksArray);
       console.log("This response is from function for books insert into database");
       return db.query(`INSERT INTO books (title) VALUES ($1) returning *;`, apiResponseBooksArray)
-      .then(data => {
-        // console.log("+++++++", data.rows);
-        const book = data.rows[0];
-        return db.query(`INSERT INTO session (user_id, book_id) VALUES ($1,$2) returning *;`, [1, book.id])
-          .then(data => {
-            // console.log("-----------", data.rows);
-          })
-      })
-      .catch(err => {
-        console.log(err);
-      });
+        .then(data => {
+          // console.log("+++++++", data.rows);
+          const book = data.rows[0];
+          return db.query(`INSERT INTO session (user_id, book_id) VALUES ($1,$2) returning *;`, [1, book.id])
+            .then(data => {
+              // console.log("-----------", data.rows);
+            })
+        })
+        .catch(err => {
+          console.log(err);
+        });
       // return apiResponseBooksArray; //ONLY KEEP THIS WHEN WE ARE READY FOR INSERTION
     } else if (addItemToProductsList) {
       // console.log(addItemToProductsList);
       console.log(apiResponseProductsArray);
       console.log("This response is from function for products insert into database");
       return db.query(`INSERT INTO products (name) VALUES ($1) returning *;`, apiResponseProductsArray)
-      .then(data => {
-        // console.log("+++++++", data.rows);
-        const product = data.rows[0];
-        return db.query(`INSERT INTO session (user_id, product_id) VALUES ($1,$2) returning *;`, [1, product.id])
-          .then(data => {
-            // console.log("-----------", data.rows);
-          })
-      })
-      .catch(err => {
-        console.log(err);
-      });
+        .then(data => {
+          // console.log("+++++++", data.rows);
+          const product = data.rows[0];
+          return db.query(`INSERT INTO session (user_id, product_id) VALUES ($1,$2) returning *;`, [1, product.id])
+            .then(data => {
+              // console.log("-----------", data.rows);
+            })
+        })
+        .catch(err => {
+          console.log(err);
+        });
       // return apiResponseProductsArray; //ONLY KEEP THIS WHEN WE ARE READY FOR INSERTION
     }
   }
@@ -232,6 +232,48 @@ module.exports = (db) => {
     //send data to each single url, so we can use those data in frontend
     res.redirect('/dashboard');
   })
+
+
+
+  router.post("/edit/movie", (req, res) => {
+    console.log(req.body);
+    console.log(req.body.id);
+    return db.query(`
+    INSERT INTO products (name)
+    SELECT title FROM movies
+    WHERE id = $1 RETURNING *;`, [req.body.id])
+      .then(data => {
+        console.log(data.rows[0].id);
+        return db.query(`
+        UPDATE session SET product_id = $1, movie_id = NULL
+        WHERE movie_id = $2 RETURNING *;`, [data.rows[0].id, req.body.id])
+          .then(data => {
+            const results = data.rows;
+            console.log(results);
+            res.json({ response_code:200 });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+        })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  router.post("/delete/movie", (req, res) => {
+    console.log(req.body);
+    console.log(req.body.id);
+    return db.query(`DELETE FROM session WHERE movie_id = $1`, [req.body.id])
+      .then(data => {
+        const results = data.rows;
+        res.json({ response_code:200 });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
 
   //Get title from table -> books where user_id = 1, then send results as json to frontend (dev user)
   router.get("/book", (req, res) => {

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>DASHBOARD PAGE</title>
+  <title>Dailies Dashboard</title>
 
   <%- include('partials/_link') %>
     <!-- <script type="text/javascript" src="/routes/dashboard.js"></script> -->
@@ -15,40 +15,65 @@
 <body>
   <%- include('partials/_header') %>
     <main class="dashboardMain">
-        <form action="/dashboard" method="POST" class="movies-form">
-          <div id="searchbar">
-            <i class="fa-solid fa-magnifying-glass fa-3x"></i>
-            <i class="fa-solid fa-circle-xmark fa-3x"></i>
-            <input type="text" name="movie" id="movie-query" placeholder="Search" />
-          </div>
-          <div>
-            <button type="submit" class="btn-movies btn-light" placerholder="Add An Item">Add a To-Do Item</button>
-          </div>
-        </form>
+      <form action="/dashboard" method="POST" class="movies-form">
+        <div id="searchbar">
+          <i class="fa-solid fa-magnifying-glass fa-3x"></i>
+          <i class="fa-solid fa-circle-xmark fa-3x"></i>
+          <input type="text" name="movie" id="movie-query" placeholder="Search" />
+        </div>
+        <div>
+          <button type="submit" class="btn-movies btn-light" placerholder="Add An Item">Add a To-Do Item</button>
+        </div>
+      </form>
     </main>
 
     <section class="show_todo">
       <article>
-        <h5 class = "categoryTitle">MOVIES TO WATCH</h5>
+        <h5 class="categoryTitle">MOVIES TO WATCH</h5>
         <p id="movieList">
         </p>
       </article>
       <article>
-        <h5 class = "categoryTitle">RESTAURANTS TO GO</h5>
+        <h5 class="categoryTitle">RESTAURANTS TO GO</h5>
         <p id="restaurantList">
         </p>
       </article>
       <article>
-        <h5 class = "categoryTitle">PRODUCTS TO BUY</h5>
+        <h5 class="categoryTitle">PRODUCTS TO BUY</h5>
         <p id="productList">
         </p>
       </article>
       <article>
-        <h5 class = "categoryTitle">BOOKS TO READ</h5>
+        <h5 class="categoryTitle">BOOKS TO READ</h5>
         <p id="bookList">
         </p>
       </article>
     </section>
+
+    <form id="selectMove">
+      <div id="selectMoveBox">
+        <p>Move To:</p>
+        <div id="selections">
+          <div>
+            <input type="radio" name="editTo" id="restaurantsSelect" value="Restaurants">
+            <label for="restaurantsSelect">Restaurants</label>
+          </div>
+          <div>
+            <input type="radio" name="editTo" id="moviesSelect" value="Movies">
+            <label for="moviesSelect">Movies</label>
+          </div>
+          <div>
+            <input type="radio" name="editTo" id="productsSelect" value="Products">
+            <label for="productsSelect">Products</label>
+          </div>
+          <div>
+            <input type="radio" name="editTo" id="booksSelect" value="Books">
+            <label for="booksSelect">Books</label>
+          </div>
+        </div>
+        <input type="submit" value="Submit">
+      </div>
+    </form>
 
 </body>
 
