@@ -31,12 +31,15 @@ $(document).ready(() => {
 
       $.ajax({
         type: "POST",
-        url: "http://localhost:8080/dashboard/edit",
+        url: "http://localhost:8080/dashboard/edit/movie",
         data: {
-          id: "DOES THIS WORK?",
+          id: moviePK,
         },
         success: function (result) {
-          alert('ok');
+          if (result.response_code == 200) {
+            window.location.reload();
+          }
+          // alert('ok');
         },
         error: function (result) {
           alert('error');
@@ -54,12 +57,14 @@ $(document).ready(() => {
       console.log(moviePK);
       $.ajax({
         type: "POST",
-        url: "http://localhost:8080/dashboard/delete",
+        url: "http://localhost:8080/dashboard/delete/movie",
         data: {
-          id: "DOES THIS WORK?",
+          id: moviePK,
         },
         success: function (result) {
-          alert('ok');
+          if (result.response_code == 200) {
+            window.location.reload();
+          }
         },
         error: function (result) {
           alert('error');
