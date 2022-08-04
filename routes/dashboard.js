@@ -214,8 +214,6 @@ module.exports = (db) => {
     res.redirect('/dashboard');
   })
 
-
-
   router.post("/edit/movie", (req, res) => {
     // console.log(req.body);
     // console.log(req.body.id);  //4
@@ -238,18 +236,23 @@ module.exports = (db) => {
       itemInfo = "name"
     }
 
+    console.log(req.body.id);
+    console.log(req.body.type);
+    console.log(taqleInto);
+    console.log(taqleInSession);
+    console.log(itemInfo);
+
     return db.query(`
-    INSERT INTO ${tableInto} (${itemInfo})
     SELECT name FROM movies
     WHERE id = $1 RETURNING *;`, [req.body.id])
       .then(data => {
-        // console.log(data.rows[0].id);
+        console.log(data.rows[0].id);
         return db.query(`
         UPDATE session SET ${tableInSession} = $1, movie_id = NULL
         WHERE movie_id = $2 RETURNING *;`, [data.rows[0].id, req.body.id])
           .then(data => {
             const results = data.rows;
-            // console.log(results);
+            console.log(results);
             res.json({ response_code: 200 });
           })
           .catch(err => {
