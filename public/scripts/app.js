@@ -20,8 +20,38 @@ $(document).ready(() => {
     }
   })
 
-  const $profileSubmission = $('#profile-update');
+  // Logic for
+  $('#login-form').on('submit', event => {
+    event.preventDefault();
+    const data = $('#login-form').serializeArray();
+    console.log(data[0].value);
+    console.log(data[1].value);
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:8080/login",
+      data: {
+        username: data[0].value,
+        password: data[1].value,
+      },
+      success: result => {
+        if (result.response_code == 200) {
+          alert("INVALID EMAIL/PASSWORD, PLEASE TRY AGAIN!")
+          window.location.reload();
+        } else if (result.user == "verified") {
+          window.location = "/dashboard";
+        } else if (result.user == "noexist") {
+          alert("That User Does Not Exist, Please Register!")
+          window.location.reload();
+        }
+      },
+      error: result => {
+        alert('error');
+      }
+    })
+  })
 
+  //logic for handling
+  const $profileSubmission = $('#profile-update');
   $profileSubmission.on('submit', event => {
     event.preventDefault();
     const data = $profileSubmission.serializeArray();
