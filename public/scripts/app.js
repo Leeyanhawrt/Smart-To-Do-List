@@ -20,6 +20,17 @@ $(document).ready(() => {
     }
   })
 
+  const $profileSubmission = $('.urlSubmitted');
+
+  $profileSubmission.on('submit', event => {
+    event.preventDefault();
+    const $urlEntered = $('.newURL').val();
+    console.log('JQUERY WORKED')
+    console.log($urlEntered)
+  })
+
+
+
   let PK;
   // let restaurant;
   // let product;

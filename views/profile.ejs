@@ -11,11 +11,17 @@
 
 <body>
   <%- include('partials/_header') %>
+
     <main class="profileMain">
+
       <section id="profileRight">
-        <img class="profileImage"
-          src="https://www.nicepng.com/png/detail/875-8759926_coolcat-sticker-mlg-cat-with-glasses.png" alt="CatJam"
-          style="width:300px; height: 300px;">
+        <div class="editProfile">
+          <img class="profileImage"
+            src="https://www.nicepng.com/png/detail/875-8759926_coolcat-sticker-mlg-cat-with-glasses.png" alt="CatJam"
+            style="width:300px; height: 300px;">
+          <form action="/profile" method="POST">
+          <input type="text" name="url" class="newURL" placeholder="Enter a New Profile Picture URL" />
+        </div>
         <section id="userInfo">
           <p>Username: Kool Kat</p>
           <p>Restaurant Preferences: Italian, Japanese</p>
@@ -24,7 +30,8 @@
           <p>Reading Genre Preferences: Thriller, Suspense</p>
         </section>
       </section>
-      <button class="btn-secondary profile-submit">Edit Profile Information</button>
+      <button type="submit" class="btn-secondary profile-submit">Edit Profile Information</button>
+      </form>
     </main>
 
 </body>
