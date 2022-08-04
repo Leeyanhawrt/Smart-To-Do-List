@@ -20,10 +20,10 @@ $(document).ready(() => {
     }
   })
 
-  let moviePK;
-  let restaurantPK;
-  let productPK;
-  let bookPK;
+  let PK;
+  // let restaurant;
+  // let product;
+  // let book;
   let category;
 
   $('body').on("click", () => {
@@ -31,7 +31,7 @@ $(document).ready(() => {
       console.log(event)
       $('#selectMove').toggle()
       console.log(event.currentTarget.attributes.id.value);
-      moviePK = event.currentTarget.attributes.id.value;
+      PK = event.currentTarget.attributes.id.value;
     })
   })
 
@@ -47,7 +47,7 @@ $(document).ready(() => {
       type: "POST",
       url: "http://localhost:8080/dashboard/edit/movie",
       data: {
-        id: moviePK,
+        id: PK,
         type: category,
       },
       success: function (result) {
@@ -66,13 +66,13 @@ $(document).ready(() => {
     $('.deleteMovie').on("click", (event) => {
       event.preventDefault();
       // console.log(event.currentTarget.attributes.id.value);
-      moviePK = event.currentTarget.attributes.id.value;
+      PK = event.currentTarget.attributes.id.value;
       // console.log(moviePK);
       $.ajax({
         type: "POST",
         url: "http://localhost:8080/dashboard/delete/movie",
         data: {
-          id: moviePK,
+          id: PK,
         },
         success: function (result) {
           if (result.response_code == 200) {
@@ -95,9 +95,9 @@ $(document).ready(() => {
     $('.editRestaurant').on("click", (event) => {
       event.preventDefault();
       // console.log(event.currentTarget.attributes.id.value);
-      restaurantPK = event.currentTarget.attributes.id.value;
+      PK = event.currentTarget.attributes.id.value;
       category = "product";
-      // console.log(restaurantPK);
+      // console.log(PK);
       // console.log(category);
       event.stopPropagation();
 
@@ -105,7 +105,7 @@ $(document).ready(() => {
         type: "POST",
         url: "http://localhost:8080/dashboard/edit/restaurant",
         data: {
-          id: restaurantPK,
+          id: PK,
           type: category,
         },
         success: function (result) {
@@ -126,13 +126,13 @@ $(document).ready(() => {
     $('.deleteRestaurant').on("click", (event) => {
       event.preventDefault();
       // console.log(event.currentTarget.attributes.id.value);
-      restaurantPK = event.currentTarget.attributes.id.value;
-      // console.log(restaurantPK);
+      PK = event.currentTarget.attributes.id.value;
+      // console.log(PK);
       $.ajax({
         type: "POST",
         url: "http://localhost:8080/dashboard/delete/restaurant",
         data: {
-          id: restaurantPK,
+          id: PK,
         },
         success: function (result) {
           if (result.response_code == 200) {
@@ -155,9 +155,9 @@ $(document).ready(() => {
     $('.editProduct').on("click", (event) => {
       event.preventDefault();
       // console.log(event.currentTarget.attributes.id.value);
-      productPK = event.currentTarget.attributes.id.value;
+      PK = event.currentTarget.attributes.id.value;
       category = "movie";
-      // console.log(productPK);
+      // console.log(PK);
       // console.log(category);
       event.stopPropagation();
 
@@ -165,7 +165,7 @@ $(document).ready(() => {
         type: "POST",
         url: "http://localhost:8080/dashboard/edit/product",
         data: {
-          id: productPK,
+          id: PK,
           type: category,
         },
         success: function (result) {
@@ -186,13 +186,13 @@ $(document).ready(() => {
     $('.deleteProduct').on("click", (event) => {
       event.preventDefault();
       // console.log(event.currentTarget.attributes.id.value);
-      productPK = event.currentTarget.attributes.id.value;
-      // console.log(productPK);
+      PK = event.currentTarget.attributes.id.value;
+      // console.log(PK);
       $.ajax({
         type: "POST",
         url: "http://localhost:8080/dashboard/delete/product",
         data: {
-          id: productPK,
+          id: PK,
         },
         success: function (result) {
           if (result.response_code == 200) {
@@ -217,9 +217,9 @@ $(document).ready(() => {
     $('.editBook').on("click", (event) => {
       event.preventDefault();
       // console.log(event.currentTarget.attributes.id.value);
-      bookPK = event.currentTarget.attributes.id.value;
+      book = event.currentTarget.attributes.id.value;
       category = "movie";
-      // console.log(bookPK);
+      // console.log(book);
       // console.log(category);
       event.stopPropagation();
 
@@ -227,7 +227,7 @@ $(document).ready(() => {
         type: "POST",
         url: "http://localhost:8080/dashboard/edit/book",
         data: {
-          id: bookPK,
+          id: book,
           type: category,
         },
         success: function (result) {
@@ -248,13 +248,13 @@ $(document).ready(() => {
     $('.deleteBook').on("click", (event) => {
       event.preventDefault();
       // console.log(event.currentTarget.attributes.id.value);
-      bookPK = event.currentTarget.attributes.id.value;
-      // console.log(bookPK);
+      book = event.currentTarget.attributes.id.value;
+      // console.log(book);
       $.ajax({
         type: "POST",
         url: "http://localhost:8080/dashboard/delete/book",
         data: {
-          id: bookPK,
+          id: book,
         },
         success: function (result) {
           if (result.response_code == 200) {
