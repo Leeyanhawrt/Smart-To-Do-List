@@ -77,6 +77,12 @@ $(document).ready(() => {
     });
   });
 
+  $('#registeration-submit').on('click',event => {
+    event.preventDefault();
+    alert("Thanks for registration!");
+    window.location = "/";
+  })
+
   let PK;
   // let restaurant;
   // let product;
