@@ -211,73 +211,246 @@ module.exports = (db) => {
 
     //Calling function that determines which category user's todo item needs to be and returns an array with the user query for database insertion
     getArrayForDatabase();
-
-    // console.log(apiResponseMoviesJSON);
-    // console.log(apiResponseRestaurantsJSON);
-    // console.log(apiResponseBooksJSON);
-    // console.log(apiResponseMoviesArray);
-    // console.log(apiResponseRestaurantsArray);
-    // console.log(apiResponseBooksArray);
-    // console.log(apiResponseProductsArray);
-
-    // console.log(currentBookItemsLength);
-    // console.log(addItemToMoviesList);
-    // console.log(addItemToRestaurantsList);
-    // console.log(addItemToBooksList);
-    // console.log(addItemToProductsList);
-
-    // console.log(sanitizeMovieQuery(req.body.movie));
-    // console.log(sanitizeFoodBusinessQuery(req.body.movie));
-    // console.log(sanitizeBookAndAuthorQuery(req.body.movie));
-    //send data to each single url, so we can use those data in frontend
     res.redirect('/dashboard');
   })
 
 
 
   router.post("/edit/movie", (req, res) => {
-    console.log(req.body);
-    console.log(req.body.id);
+    // console.log(req.body);
+    // console.log(req.body.id);  //4
+    // console.log(req.body.type);  //product OR book OR restaurant
+    let tableInto;
+    let tableInSession;
+    let itemInfo;
+
+    if (req.body.type == "product") {
+      tableInto = "products";
+      tableInSession = "product_id";
+      itemInfo = "name"
+    } else if (req.body.type == "book") {
+      tableInto = "books";
+      tableInSession = "book_id";
+      itemInfo = "name"
+    } else if (req.body.type == "restaurant") {
+      tableInto = "restaurants";
+      tableInSession = "restaurant_id";
+      itemInfo = "name"
+    }
+
     return db.query(`
-    INSERT INTO products (name)
-    SELECT title FROM movies
+    INSERT INTO ${tableInto} (${itemInfo})
+    SELECT name FROM movies
     WHERE id = $1 RETURNING *;`, [req.body.id])
       .then(data => {
-        console.log(data.rows[0].id);
+        // console.log(data.rows[0].id);
         return db.query(`
-        UPDATE session SET product_id = $1, movie_id = NULL
+        UPDATE session SET ${tableInSession} = $1, movie_id = NULL
         WHERE movie_id = $2 RETURNING *;`, [data.rows[0].id, req.body.id])
           .then(data => {
             const results = data.rows;
-            console.log(results);
-            res.json({ response_code:200 });
+            // console.log(results);
+            res.json({ response_code: 200 });
           })
           .catch(err => {
             console.log(err);
           });
-        })
-      .catch(err => {
-        console.log(err);
-      });
-  });
-
-  router.post("/delete/movie", (req, res) => {
-    console.log(req.body);
-    console.log(req.body.id);
-    return db.query(`DELETE FROM session WHERE movie_id = $1`, [req.body.id])
-      .then(data => {
-        const results = data.rows;
-        res.json({ response_code:200 });
       })
       .catch(err => {
         console.log(err);
       });
   });
 
+  router.post("/delete/movie", (req, res) => {
+    // console.log(req.body);
+    // console.log(req.body.id);
+    return db.query(`DELETE FROM session WHERE movie_id = $1`, [req.body.id])
+      .then(data => {
+        const results = data.rows;
+        res.json({ response_code: 200 });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  router.post("/edit/restaurant", (req, res) => {
+    // console.log(req.body);
+    // console.log(req.body.id);  //4
+    // console.log(req.body.type);  //movie OR product OR book
+    let tableInto;
+    let tableInSession;
+    let itemInfo;
+
+    if (req.body.type == "movie") {
+      tableInto = "movies";
+      tableInSession = "movie_id";
+      itemInfo = "name"
+    } else if (req.body.type == "product") {
+      tableInto = "products";
+      tableInSession = "product_id";
+      itemInfo = "name"
+    } else if (req.body.type == "book") {
+      tableInto = "books";
+      tableInSession = "book_id";
+      itemInfo = "name"
+    }
+
+    return db.query(`
+    INSERT INTO ${tableInto} (${itemInfo})
+    SELECT name FROM restaurants
+    WHERE id = $1 RETURNING *;`, [req.body.id])
+      .then(data => {
+        // console.log(data.rows[0].id);
+        return db.query(`
+        UPDATE session SET ${tableInSession} = $1, restaurant_id = NULL
+        WHERE restaurant_id = $2 RETURNING *;`, [data.rows[0].id, req.body.id])
+          .then(data => {
+            const results = data.rows;
+            // console.log(results);
+            res.json({ response_code: 200 });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  router.post("/delete/restaurant", (req, res) => {
+    // console.log(req.body);
+    // console.log(req.body.id);
+    return db.query(`DELETE FROM session WHERE restaurant_id = $1`, [req.body.id])
+      .then(data => {
+        const results = data.rows;
+        res.json({ response_code: 200 });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  router.post("/edit/product", (req, res) => {
+    // console.log(req.body);
+    // console.log(req.body.id);  //4
+    // console.log(req.body.type);  //movie OR restaurant OR book
+    let tableInto;
+    let tableInSession;
+    let itemInfo;
+
+    if (req.body.type == "movie") {
+      tableInto = "movies";
+      tableInSession = "movie_id";
+      itemInfo = "name"
+    } else if (req.body.type == "restaurant") {
+      tableInto = "restaurants";
+      tableInSession = "restaurant_id";
+      itemInfo = "name"
+    } else if (req.body.type == "book") {
+      tableInto = "books";
+      tableInSession = "book_id";
+      itemInfo = "name"
+    }
+
+    return db.query(`
+    INSERT INTO ${tableInto} (${itemInfo})
+    SELECT name FROM products
+    WHERE id = $1 RETURNING *;`, [req.body.id])
+      .then(data => {
+        console.log(data.rows[0].id);
+        return db.query(`
+        UPDATE session SET ${tableInSession} = $1, product_id = NULL
+        WHERE product_id = $2 RETURNING *;`, [data.rows[0].id, req.body.id])
+          .then(data => {
+            const results = data.rows;
+            // console.log(results);
+            res.json({ response_code: 200 });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  router.post("/delete/product", (req, res) => {
+    // console.log(req.body);
+    // console.log(req.body.id);
+    return db.query(`DELETE FROM session WHERE product_id = $1`, [req.body.id])
+      .then(data => {
+        const results = data.rows;
+        res.json({ response_code: 200 });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  router.post("/edit/book", (req, res) => {
+    // console.log(req.body);
+    // console.log(req.body.id);  //4
+    // console.log(req.body.type);  //movie OR restaurant OR product
+    let tableInto;
+    let tableInSession;
+    let itemInfo;
+
+    if (req.body.type == "movie") {
+      tableInto = "movies";
+      tableInSession = "movie_id";
+      itemInfo = "name"
+    } else if (req.body.type == "restaurant") {
+      tableInto = "restaurants";
+      tableInSession = "restaurant_id";
+      itemInfo = "name"
+    } else if (req.body.type == "product") {
+      tableInto = "products";
+      tableInSession = "product_id";
+      itemInfo = "name"
+    }
+
+    return db.query(`
+    INSERT INTO ${tableInto} (${itemInfo})
+    SELECT name FROM books
+    WHERE id = $1 RETURNING *;`, [req.body.id])
+      .then(data => {
+        console.log(data.rows[0].id);
+        return db.query(`
+        UPDATE session SET ${tableInSession} = $1, book_id = NULL
+        WHERE book_id = $2 RETURNING *;`, [data.rows[0].id, req.body.id])
+          .then(data => {
+            const results = data.rows;
+            // console.log(results);
+            res.json({ response_code: 200 });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  router.post("/delete/book", (req, res) => {
+    // console.log(req.body);
+    // console.log(req.body.id);
+    return db.query(`DELETE FROM session WHERE book_id = $1`, [req.body.id])
+      .then(data => {
+        const results = data.rows;
+        res.json({ response_code: 200 });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
 
   //Get title from table -> books where user_id = 1, then send results as json to frontend (dev user)
   router.get("/book", (req, res) => {
-    return db.query(`SELECT title, id FROM books
+    return db.query(`SELECT name, id FROM books
   WHERE id IN (SELECT session.book_id FROM users
   JOIN session ON users.id = user_id WHERE users.id = 1);`)
       .then(data => {
@@ -291,7 +464,7 @@ module.exports = (db) => {
 
   //Get title from table -> movie where user_id = 1, then send results as json to frontend (dev user)
   router.get("/movie", (req, res) => {
-    return db.query(`SELECT title, id FROM movies
+    return db.query(`SELECT name, id FROM movies
   WHERE id IN (SELECT session.movie_id FROM users
   JOIN session ON users.id = user_id WHERE users.id = 1);`)
       .then(data => {
