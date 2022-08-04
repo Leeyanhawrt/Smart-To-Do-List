@@ -7,8 +7,8 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    console.log(req.body.url)
-    res.redirect('/profile')
+    console.log(req.body.url);
+    res.send(req.body);
   });
 
   return router;

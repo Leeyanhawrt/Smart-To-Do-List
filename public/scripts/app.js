@@ -20,16 +20,32 @@ $(document).ready(() => {
     }
   })
 
-  const $profileSubmission = $('.urlSubmitted');
+  const $profileSubmission = $('#profile-update');
 
   $profileSubmission.on('submit', event => {
     event.preventDefault();
-    const $urlEntered = $('.newURL').val();
-    console.log('JQUERY WORKED')
-    console.log($urlEntered)
-  })
+    const data = $profileSubmission.serializeArray();
+    console.log(data);
+    $('.profileImage').attr('src', data[0].value);
+    console.log(data[0].value);
 
-
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:8080/profile",
+      data: {
+        url: data[0].value,
+      },
+      success: function (result) {
+        // if (result.response_code == 200) {
+        //   window.location.reload();
+        // }
+        console.log(result);
+      },
+      error: function (result) {
+        alert('error');
+      }
+    });
+  });
 
   let PK;
   // let restaurant;
