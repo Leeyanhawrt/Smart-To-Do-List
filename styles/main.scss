@@ -9,13 +9,13 @@ body {
 nav {
   background: $nav-bar;
   display: flex;
-  justify-content: space-between;
+  justify-content:  space-between;
   align-items: center;
   padding: 1%;
   color: $body-background;
 
   :nth-child(2n-1) {
-    margin: 0% 5%
+    margin: 0% 3%
   }
 }
 
@@ -111,9 +111,9 @@ section {
 }
 
 #projectName {
-  font-family: 'Mouse Memoirs', sans-serif;
-  font-size: 2em;
-  margin-top: 10px;
+  font-family: 'Lobster', sans-serif;
+  font-size: 4em;
+  margin-left: 8%;
 }
 
 .navBar {
@@ -181,9 +181,25 @@ display: none;
   .signedIn {
     display: flex;
     align-items: center;
-    gap: 20%;
+    justify-content: center;
 
      a:hover {
-      color: #290916;
+      color: gold;
+      text-decoration: none;
      }
   }
+
+  #headerUser {
+    color: white;
+    font-size: 1.2em;
+  }
+
+  .profileInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+  }
+
+
