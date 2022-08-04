@@ -32,7 +32,7 @@ module.exports = (db) => {
     if (addItemToMoviesList) {
       console.log(apiResponseMoviesArray);
       console.log("This response is from function for movies insert into database");
-      return db.query(`INSERT INTO movies (title) VALUES ($1) returning *;`, apiResponseMoviesArray)
+      return db.query(`INSERT INTO movies (name) VALUES ($1) returning *;`, apiResponseMoviesArray)
         .then(data => {
           // console.log("+++++++", data.rows);
           const movie = data.rows[0];
@@ -66,7 +66,7 @@ module.exports = (db) => {
       // console.log(addItemToBooksList);
       console.log(apiResponseBooksArray);
       console.log("This response is from function for books insert into database");
-      return db.query(`INSERT INTO books (title) VALUES ($1) returning *;`, apiResponseBooksArray)
+      return db.query(`INSERT INTO books (name) VALUES ($1) returning *;`, apiResponseBooksArray)
         .then(data => {
           // console.log("+++++++", data.rows);
           const book = data.rows[0];
