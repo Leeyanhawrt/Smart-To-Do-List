@@ -7,7 +7,7 @@ VALUES
   ('user4', 'password');
 
 INSERT INTO
-  movies (title, genre, duration, thumbnail)
+  movies (name, genre, duration, thumbnail)
 VALUES
   (
     'movie1',
@@ -29,7 +29,7 @@ VALUES
   );
 
 INSERT INTO
-  books (title, author, genre, published, pages)
+  books (name, author, genre, published, pages)
 VALUES
   (
     'book1',
@@ -60,7 +60,7 @@ VALUES
     35
   ),
   (
-    'book1',
+    'book5',
     'some author',
     'some genre',
     '2012-02-06',
@@ -92,9 +92,16 @@ INSERT INTO
     movie_id
   )
 VALUES
-  (1, 1, NULL, 1, 1),
-  (1, 2, 2, 3, 1),
-  (1, 3, 1, 1, 3),
-  (1, NULL, 2, 2, 2),
-  (1, NULL, 3, NULL, 3),
+  (1, 1, NULL, NULL, NULL),
+  (1, 2, NULL, NULL, NULL),
+  (1, 3, NULL, NULL, NULL),
+  (1, NULL, 1, NULL, NULL),
+  (1, NULL, 2, NULL, NULL),
+  (1, NULL, 3, NULL, NULL),
+  (1, NULL, NULL, 1, NULL),
+  (1, NULL, NULL, 2, NULL),
+  (1, NULL, NULL, 3, NULL),
+  (1, NULL, NULL, NULL, 1),
+  (1, NULL, NULL, NULL, 2),
+  (1, NULL, NULL, NULL, 3),
   (2, 1, NULL, NULL, NULL);

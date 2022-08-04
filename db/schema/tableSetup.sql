@@ -13,7 +13,7 @@ CREATE TABLE users (
 
 CREATE TABLE movies (
   id SERIAL PRIMARY KEY NOT NULL,
-  title VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NOT NULL,
   genre VARCHAR(255),
   duration VARCHAR(255),
   thumbnail TEXT
@@ -21,7 +21,7 @@ CREATE TABLE movies (
 
 CREATE TABLE books (
   id SERIAL PRIMARY KEY NOT NULL,
-  title VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NOT NULL,
   author VARCHAR(255),
   genre VARCHAR(255),
   published DATE,
@@ -50,4 +50,3 @@ CREATE TABLE session (
   restaurant_id INTEGER REFERENCES restaurants(id) ON DELETE CASCADE,
   movie_id INTEGER REFERENCES movies(id) ON DELETE CASCADE
 );
-
