@@ -20,45 +20,53 @@ $(document).ready(() => {
     }
   })
 
+  let moviePK;
+  let restaurantPK;
+  let productPK;
+  let bookPK;
+  let category;
 
-  $('body').on("click", (event) => {
-    $('.editMovie').on("click", (event) => {
-      event.preventDefault();
-      // console.log(event.currentTarget.attributes.id.value);
-      let moviePK = event.currentTarget.attributes.id.value;
-      let category = "restaurant";
-      // console.log(moviePK);
-      // console.log(category);
-      event.stopPropagation();
-
-      $.ajax({
-        type: "POST",
-        url: "http://localhost:8080/dashboard/edit/movie",
-        data: {
-          id: moviePK,
-          type: category,
-        },
-        success: function (result) {
-          if (result.response_code == 200) {
-            window.location.reload();
-          }
-          // alert('ok');
-        },
-        error: function (result) {
-          alert('error');
-        }
-      });
-
+  $('body').on("click", () => {
+    $('.changeContainer').on("click", (event) => {
+      console.log(event)
+      $('#selectMove').toggle()
+      console.log(event.currentTarget.attributes.id.value);
+      moviePK = event.currentTarget.attributes.id.value;
     })
   })
 
+  $('#selectMove').on('submit', function () {
+    event.preventDefault();
+    console.log("after submit was pressed");
+    category = $('input[name=editTo]:checked').val();
+    console.log(category);
+    $('#selectMove').slideToggle('slow')
+    event.stopPropagation();
 
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:8080/dashboard/edit/movie",
+      data: {
+        id: moviePK,
+        type: category,
+      },
+      success: function (result) {
+        if (result.response_code == 200) {
+          window.location.reload();
+        }
+      },
 
-  $('body').on("click", (event) => {
+      error: function (result) {
+        alert('error');
+      }
+    });
+  });
+
+  $('body').on("click", () => {
     $('.deleteMovie').on("click", (event) => {
       event.preventDefault();
       // console.log(event.currentTarget.attributes.id.value);
-      let moviePK = event.currentTarget.attributes.id.value;
+      moviePK = event.currentTarget.attributes.id.value;
       // console.log(moviePK);
       $.ajax({
         type: "POST",
@@ -79,12 +87,16 @@ $(document).ready(() => {
     })
   })
 
-  $('body').on("click", (event) => {
+
+
+
+
+  $('body').on("click", () => {
     $('.editRestaurant').on("click", (event) => {
       event.preventDefault();
       // console.log(event.currentTarget.attributes.id.value);
-      let restaurantPK = event.currentTarget.attributes.id.value;
-      let category = "product";
+      restaurantPK = event.currentTarget.attributes.id.value;
+      category = "product";
       // console.log(restaurantPK);
       // console.log(category);
       event.stopPropagation();
@@ -110,11 +122,11 @@ $(document).ready(() => {
     })
   })
 
-  $('body').on("click", (event) => {
+  $('body').on("click", () => {
     $('.deleteRestaurant').on("click", (event) => {
       event.preventDefault();
       // console.log(event.currentTarget.attributes.id.value);
-      let restaurantPK = event.currentTarget.attributes.id.value;
+      restaurantPK = event.currentTarget.attributes.id.value;
       // console.log(restaurantPK);
       $.ajax({
         type: "POST",
@@ -135,12 +147,16 @@ $(document).ready(() => {
     })
   })
 
-  $('body').on("click", (event) => {
+
+
+
+
+  $('body').on("click", () => {
     $('.editProduct').on("click", (event) => {
       event.preventDefault();
       // console.log(event.currentTarget.attributes.id.value);
-      let productPK = event.currentTarget.attributes.id.value;
-      let category = "movie";
+      productPK = event.currentTarget.attributes.id.value;
+      category = "movie";
       // console.log(productPK);
       // console.log(category);
       event.stopPropagation();
@@ -166,11 +182,11 @@ $(document).ready(() => {
     })
   })
 
-  $('body').on("click", (event) => {
+  $('body').on("click", () => {
     $('.deleteProduct').on("click", (event) => {
       event.preventDefault();
       // console.log(event.currentTarget.attributes.id.value);
-      let productPK = event.currentTarget.attributes.id.value;
+      productPK = event.currentTarget.attributes.id.value;
       // console.log(productPK);
       $.ajax({
         type: "POST",
@@ -191,12 +207,18 @@ $(document).ready(() => {
     })
   })
 
-  $('body').on("click", (event) => {
+
+
+
+
+
+
+  $('body').on("click", () => {
     $('.editBook').on("click", (event) => {
       event.preventDefault();
       // console.log(event.currentTarget.attributes.id.value);
-      let bookPK = event.currentTarget.attributes.id.value;
-      let category = "movie";
+      bookPK = event.currentTarget.attributes.id.value;
+      category = "movie";
       // console.log(bookPK);
       // console.log(category);
       event.stopPropagation();
@@ -222,11 +244,11 @@ $(document).ready(() => {
     })
   })
 
-  $('body').on("click", (event) => {
+  $('body').on("click", () => {
     $('.deleteBook').on("click", (event) => {
       event.preventDefault();
       // console.log(event.currentTarget.attributes.id.value);
-      let bookPK = event.currentTarget.attributes.id.value;
+      bookPK = event.currentTarget.attributes.id.value;
       // console.log(bookPK);
       $.ajax({
         type: "POST",
@@ -273,6 +295,3 @@ $(document).ready(() => {
 //   const $booksForm = $('.books-form');
 
 
-// $('body').on("click", () => {
-//   $('.changeContainer').on("click", () => {
-//     $('#selectMove').toggle()
