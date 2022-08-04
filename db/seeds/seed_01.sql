@@ -1,10 +1,10 @@
 INSERT INTO
-  users (username, PASSWORD)
+  users (username, PASSWORD, imageURL)
 VALUES
-  ('user1', 'password'),
-  ('user2', 'password'),
-  ('user3', 'password'),
-  ('user4', 'password');
+  ('user1', 'password','https://www.nicepng.com/png/detail/875-8759926_coolcat-sticker-mlg-cat-with-glasses.png'),
+  ('user2', 'password',NULL),
+  ('user3', 'password',NULL),
+  ('user4', 'password',NULL);
 
 INSERT INTO
   movies (name, genre, duration, thumbnail)

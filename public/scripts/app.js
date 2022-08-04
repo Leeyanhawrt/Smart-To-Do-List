@@ -39,7 +39,7 @@ $(document).ready(() => {
         // if (result.response_code == 200) {
         //   window.location.reload();
         // }
-        console.log(result);
+        // console.log(result);
       },
       error: function (result) {
         alert('error');
