@@ -7,28 +7,28 @@ $(document).ready(function () {
     if (listCategory === 'movieList') {
       markup = `<p class = "listItem"> ${listDataObj[name[0]]}
       <span>
-      <button type = "EDIT" class = "editMovie changeContainer" id="${listDataObj[name[1]]}"><i class="fa-solid fa-pen-to-square"></i></button>
+      <button type = "EDIT" class = "editMovie changeContainer" id="${listDataObj[name[1]]}" value="movie"><i class="fa-solid fa-pen-to-square"></i></button>
       <button type = "DELETE" class = "deleteMovie" id="${listDataObj[name[1]]}"><i class="fa-solid fa-trash-can"></i></button>
       </span>
       </p>`;
     } else if (listCategory === 'restaurantList') {
       markup = `<p class = "listItem"> ${listDataObj[name[0]]}
       <span>
-      <button type = "EDIT" class = "editRestaurant changeContainer" id="${listDataObj[name[1]]}"><i class="fa-solid fa-pen-to-square"></i></button>
+      <button type = "EDIT" class = "editRestaurant changeContainer" id="${listDataObj[name[1]]}" value="restaurant"><i class="fa-solid fa-pen-to-square"></i></button>
       <button type = "DELETE" class = "deleteRestaurant" id="${listDataObj[name[1]]}"><i class="fa-solid fa-trash-can"></i></button>
       </span>
       </p>`;
     } else if (listCategory === 'productList') {
       markup = `<p class = "listItem"> ${listDataObj[name[0]]}
       <span>
-      <button type = "EDIT" class = "editProduct changeContainer" id="${listDataObj[name[1]]}"><i class="fa-solid fa-pen-to-square"></i></button>
+      <button type = "EDIT" class = "editProduct changeContainer" id="${listDataObj[name[1]]}" value="product"><i class="fa-solid fa-pen-to-square"></i></button>
       <button type = "DELETE" class = "deleteProduct" id="${listDataObj[name[1]]}"><i class="fa-solid fa-trash-can"></i></button>
       </span>
       </p> `;
     } else if (listCategory === 'bookList') {
       markup = `<p class = "listItem"> ${listDataObj[name[0]]}
       <span>
-      <button type = "EDIT" class = "editBook changeContainer" id="${listDataObj[name[1]]}"><i class="fa-solid fa-pen-to-square"></i></button>
+      <button type = "EDIT" class = "editBook changeContainer" id="${listDataObj[name[1]]}" value="book"><i class="fa-solid fa-pen-to-square"></i></button>
       <button type = "DELETE" class = "deleteBook" id="${listDataObj[name[1]]}"><i class="fa-solid fa-trash-can"></i></button>
       </span>
       </p>`;

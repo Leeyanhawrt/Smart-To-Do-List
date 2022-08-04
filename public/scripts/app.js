@@ -24,6 +24,7 @@ $(document).ready(() => {
   // let restaurant;
   // let product;
   // let book;
+  let buttonCategory;
   let category;
 
   $('body').on("click", () => {
@@ -32,6 +33,8 @@ $(document).ready(() => {
       $('#selectMove').slideToggle('slow')
       console.log(event.currentTarget.attributes.id.value);
       PK = event.currentTarget.attributes.id.value;
+      console.log(event.currentTarget.attributes.value.value);
+      buttonCategory = event.currentTarget.attributes.value.value;
     })
   })
 
@@ -42,9 +45,9 @@ $(document).ready(() => {
     console.log(category);
     event.stopPropagation();
 
-    if (category == "movie") {
+    if (buttonCategory == "movie") {
 
-    console.log("First API Call");
+      console.log("First ajax Call");
       $.ajax({
         type: "POST",
         url: "http://localhost:8080/dashboard/edit/movie",
@@ -62,9 +65,9 @@ $(document).ready(() => {
         }
       });
 
-    } else if (category == "restaurant") {
+    } else if (buttonCategory == "restaurant") {
 
-    console.log("Second API Call");
+      console.log("Second ajax Call");
 
       $.ajax({
         type: "POST",
@@ -84,9 +87,9 @@ $(document).ready(() => {
         }
       });
 
-    } else if (category == "product") {
+    } else if (buttonCategory == "product") {
 
-    console.log("Third API Call");
+      console.log("Third ajax Call");
       $.ajax({
         type: "POST",
         url: "http://localhost:8080/dashboard/edit/product",
@@ -105,9 +108,9 @@ $(document).ready(() => {
         }
       });
 
-    } else if (category == "book") {
+    } else if (buttonCategory == "book") {
 
-    console.log("Fourth API Call");
+      console.log("Fourth ajax Call");
 
       $.ajax({
         type: "POST",

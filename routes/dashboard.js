@@ -214,35 +214,41 @@ module.exports = (db) => {
     res.redirect('/dashboard');
   })
 
+
   router.post("/edit/movie", (req, res) => {
-    // console.log(req.body);
-    // console.log(req.body.id);  //4
-    // console.log(req.body.type);  //product OR book OR restaurant
-    let tableInto;
-    let tableInSession;
-    let itemInfo;
+    console.log("movie route is operating")
+    console.log(req.body);
+    console.log(req.body.id);  //4
+    console.log(req.body.type);  //product OR book OR restaurant
+    let tableInto = "";
+    let tableInSession = "";
+    let itemInfo = "";
 
     if (req.body.type == "product") {
+      console.log("first if");
       tableInto = "products";
       tableInSession = "product_id";
       itemInfo = "name"
     } else if (req.body.type == "book") {
+      console.log("second if");
       tableInto = "books";
       tableInSession = "book_id";
       itemInfo = "name"
     } else if (req.body.type == "restaurant") {
+      console.log("third if");
       tableInto = "restaurants";
       tableInSession = "restaurant_id";
       itemInfo = "name"
     }
 
-    console.log(req.body.id);
-    console.log(req.body.type);
-    console.log(taqleInto);
-    console.log(taqleInSession);
+    // console.log(typeof req.body.id);
+    // console.log(typeof req.body.type);
+    console.log(tableInto);
+    console.log(tableInSession);
     console.log(itemInfo);
 
     return db.query(`
+    INSERT INTO ${tableInto} (${itemInfo})
     SELECT name FROM movies
     WHERE id = $1 RETURNING *;`, [req.body.id])
       .then(data => {
@@ -264,40 +270,37 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/delete/movie", (req, res) => {
-    // console.log(req.body);
-    // console.log(req.body.id);
-    return db.query(`DELETE FROM session WHERE movie_id = $1`, [req.body.id])
-      .then(data => {
-        const results = data.rows;
-        res.json({ response_code: 200 });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  });
-
   router.post("/edit/restaurant", (req, res) => {
-    // console.log(req.body);
-    // console.log(req.body.id);  //4
-    // console.log(req.body.type);  //movie OR product OR book
-    let tableInto;
-    let tableInSession;
-    let itemInfo;
+    console.log("restaurant route is operating")
+    console.log(req.body);
+    console.log(req.body.id);  //4
+    console.log(req.body.type);  //movie OR product OR book
+    let tableInto = "";
+    let tableInSession = "";
+    let itemInfo = "";
 
     if (req.body.type == "movie") {
+      console.log("first if");
       tableInto = "movies";
       tableInSession = "movie_id";
       itemInfo = "name"
     } else if (req.body.type == "product") {
+      console.log("second if");
       tableInto = "products";
       tableInSession = "product_id";
       itemInfo = "name"
     } else if (req.body.type == "book") {
+      console.log("third if");
       tableInto = "books";
       tableInSession = "book_id";
       itemInfo = "name"
     }
+
+    // console.log(typeof req.body.id);
+    // console.log(typeof req.body.type);
+    console.log(tableInto);
+    console.log(tableInSession);
+    console.log(itemInfo);
 
     return db.query(`
     INSERT INTO ${tableInto} (${itemInfo})
@@ -322,40 +325,37 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/delete/restaurant", (req, res) => {
-    // console.log(req.body);
-    // console.log(req.body.id);
-    return db.query(`DELETE FROM session WHERE restaurant_id = $1`, [req.body.id])
-      .then(data => {
-        const results = data.rows;
-        res.json({ response_code: 200 });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  });
-
   router.post("/edit/product", (req, res) => {
-    // console.log(req.body);
-    // console.log(req.body.id);  //4
-    // console.log(req.body.type);  //movie OR restaurant OR book
-    let tableInto;
-    let tableInSession;
-    let itemInfo;
+    console.log("product route is operating")
+    console.log(req.body);
+    console.log(req.body.id);  //4
+    console.log(req.body.type);  //movie OR restaurant OR book
+    let tableInto = "";
+    let tableInSession = "";
+    let itemInfo = "";
 
     if (req.body.type == "movie") {
+      console.log("first if");
       tableInto = "movies";
       tableInSession = "movie_id";
       itemInfo = "name"
     } else if (req.body.type == "restaurant") {
+      console.log("second if");
       tableInto = "restaurants";
       tableInSession = "restaurant_id";
       itemInfo = "name"
     } else if (req.body.type == "book") {
+      console.log("third if");
       tableInto = "books";
       tableInSession = "book_id";
       itemInfo = "name"
     }
+
+    // console.log(typeof req.body.id);
+    // console.log(typeof req.body.type);
+    console.log(tableInto);
+    console.log(tableInSession);
+    console.log(itemInfo);
 
     return db.query(`
     INSERT INTO ${tableInto} (${itemInfo})
@@ -364,8 +364,8 @@ module.exports = (db) => {
       .then(data => {
         console.log(data.rows[0].id);
         return db.query(`
-        UPDATE session SET ${tableInSession} = $1, product_id = NULL
-        WHERE product_id = $2 RETURNING *;`, [data.rows[0].id, req.body.id])
+      UPDATE session SET ${tableInSession} = $1, product_id = NULL
+      WHERE product_id = $2 RETURNING *;`, [data.rows[0].id, req.body.id])
           .then(data => {
             const results = data.rows;
             // console.log(results);
@@ -380,40 +380,37 @@ module.exports = (db) => {
       });
   });
 
-  router.post("/delete/product", (req, res) => {
-    // console.log(req.body);
-    // console.log(req.body.id);
-    return db.query(`DELETE FROM session WHERE product_id = $1`, [req.body.id])
-      .then(data => {
-        const results = data.rows;
-        res.json({ response_code: 200 });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  });
-
   router.post("/edit/book", (req, res) => {
-    // console.log(req.body);
-    // console.log(req.body.id);  //4
-    // console.log(req.body.type);  //movie OR restaurant OR product
-    let tableInto;
-    let tableInSession;
-    let itemInfo;
+    console.log("book route is operating")
+    console.log(req.body);
+    console.log(req.body.id);  //4
+    console.log(req.body.type);  //movie OR restaurant OR product
+    let tableInto = "";
+    let tableInSession = "";
+    let itemInfo = "";
 
     if (req.body.type == "movie") {
+      console.log("first if");
       tableInto = "movies";
       tableInSession = "movie_id";
       itemInfo = "name"
     } else if (req.body.type == "restaurant") {
+      console.log("second if");
       tableInto = "restaurants";
       tableInSession = "restaurant_id";
       itemInfo = "name"
     } else if (req.body.type == "product") {
+      console.log("third if");
       tableInto = "products";
       tableInSession = "product_id";
       itemInfo = "name"
     }
+
+    // console.log(typeof req.body.id);
+    // console.log(typeof req.body.type);
+    console.log(tableInto);
+    console.log(tableInSession);
+    console.log(itemInfo);
 
     return db.query(`
     INSERT INTO ${tableInto} (${itemInfo})
@@ -432,6 +429,45 @@ module.exports = (db) => {
           .catch(err => {
             console.log(err);
           });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  router.post("/delete/movie", (req, res) => {
+    // console.log(req.body);
+    // console.log(req.body.id);
+    return db.query(`DELETE FROM session WHERE movie_id = $1`, [req.body.id])
+      .then(data => {
+        const results = data.rows;
+        res.json({ response_code: 200 });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  router.post("/delete/restaurant", (req, res) => {
+    // console.log(req.body);
+    // console.log(req.body.id);
+    return db.query(`DELETE FROM session WHERE restaurant_id = $1`, [req.body.id])
+      .then(data => {
+        const results = data.rows;
+        res.json({ response_code: 200 });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  router.post("/delete/product", (req, res) => {
+    // console.log(req.body);
+    // console.log(req.body.id);
+    return db.query(`DELETE FROM session WHERE product_id = $1`, [req.body.id])
+      .then(data => {
+        const results = data.rows;
+        res.json({ response_code: 200 });
       })
       .catch(err => {
         console.log(err);
