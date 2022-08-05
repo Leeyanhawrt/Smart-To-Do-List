@@ -1,9 +1,9 @@
-$(document).ready(() => {
+// //API INFORMATION
+// //MOVIES            - https://www.omdbapi.com/
+// //FOOD BUSINESSES   - https://api.brandfetch.io/v2/brands/
+// //BOOKS             - https://www.googleapis.com/books/v1/
 
-  // Provides search functionality to magnify glass
-  $('.fa-magnifying-glass').click(() => {
-    $('#movies-form').submit()
-  })
+$(document).ready(() => {
 
   // Adds x button to search bar
   $('.fa-circle-xmark').click(() => {
@@ -20,7 +20,14 @@ $(document).ready(() => {
     }
   })
 
-  // Logic for
+  //event handler for registration page
+  $('#registeration-submit').on('click', event => {
+    event.preventDefault();
+    alert("Thanks for registration!");
+    window.location = "/";
+  })
+
+  // Logic for when user logs in with a username and password
   $('#login-form').on('submit', event => {
     event.preventDefault();
     const data = $('#login-form').serializeArray();
@@ -50,7 +57,7 @@ $(document).ready(() => {
     })
   })
 
-  //logic for handling
+  //logic for handling new image url from user and updating profile photo
   const $profileSubmission = $('#profile-update');
   $profileSubmission.on('submit', event => {
     event.preventDefault();
@@ -77,16 +84,7 @@ $(document).ready(() => {
     });
   });
 
-  $('#registeration-submit').on('click',event => {
-    event.preventDefault();
-    alert("Thanks for registration!");
-    window.location = "/";
-  })
-
   let PK;
-  // let restaurant;
-  // let product;
-  // let book;
   let buttonCategory;
   let category;
 
@@ -94,9 +92,9 @@ $(document).ready(() => {
     $('.changeContainer').on("click", (event) => {
       console.log(event)
       $('#selectMove').slideToggle('slow')
-      console.log(event.currentTarget.attributes.id.value);
+      // console.log(event.currentTarget.attributes.id.value);
       PK = event.currentTarget.attributes.id.value;
-      console.log(event.currentTarget.attributes.value.value);
+      // console.log(event.currentTarget.attributes.value.value);
       buttonCategory = event.currentTarget.attributes.value.value;
     })
   })
@@ -104,13 +102,13 @@ $(document).ready(() => {
   $('#selectMove').on('submit', function (event) {
     event.preventDefault();
     category = $('input[name=editTo]:checked').val();
-    console.log("after submit was pressed");
-    console.log(category);
+    // console.log("after submit was pressed");
+    // console.log(category);
     event.stopPropagation();
 
     if (buttonCategory == "movie") {
 
-      console.log("First ajax Call");
+      // console.log("First ajax Call");
       $.ajax({
         type: "POST",
         url: "http://localhost:8080/dashboard/edit/movie",
@@ -130,8 +128,7 @@ $(document).ready(() => {
 
     } else if (buttonCategory == "restaurant") {
 
-      console.log("Second ajax Call");
-
+      // console.log("Second ajax Call");
       $.ajax({
         type: "POST",
         url: "http://localhost:8080/dashboard/edit/restaurant",
@@ -152,7 +149,7 @@ $(document).ready(() => {
 
     } else if (buttonCategory == "product") {
 
-      console.log("Third ajax Call");
+      // console.log("Third ajax Call");
       $.ajax({
         type: "POST",
         url: "http://localhost:8080/dashboard/edit/product",
@@ -173,8 +170,7 @@ $(document).ready(() => {
 
     } else if (buttonCategory == "book") {
 
-      console.log("Fourth ajax Call");
-
+      // console.log("Fourth ajax Call");
       $.ajax({
         type: "POST",
         url: "http://localhost:8080/dashboard/edit/book",
@@ -187,7 +183,6 @@ $(document).ready(() => {
             window.location.reload();
           }
         },
-
         error: function (result) {
           alert('error');
         }
@@ -218,8 +213,6 @@ $(document).ready(() => {
     })
   })
 
-
-
   $('body').on("click", () => {
     $('.deleteRestaurant').on("click", (event) => {
       event.preventDefault();
@@ -244,11 +237,6 @@ $(document).ready(() => {
       event.stopPropagation();
     })
   })
-
-
-
-
-
 
   $('body').on("click", () => {
     $('.deleteProduct').on("click", (event) => {
@@ -275,9 +263,6 @@ $(document).ready(() => {
     })
   })
 
-
-
-
   $('body').on("click", (event) => {
     $('.deleteBook').on("click", (event) => {
       event.preventDefault();
@@ -303,9 +288,4 @@ $(document).ready(() => {
       event.stopPropagation();
     })
   })
-
-  // //API INFORMATION
-  // //MOVIES            - https://www.omdbapi.com/
-  // //FOOD BUSINESSES   - https://api.brandfetch.io/v2/brands/
-  // //BOOKS             - https://www.googleapis.com/books/v1/
 })

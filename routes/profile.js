@@ -7,9 +7,9 @@ module.exports = (db) => {
     return db.query(`
         SELECT imageURL FROM users WHERE id = 1;`)
       .then(data => {
-        console.log(data.rows)
+        // console.log(data.rows)
         templateVar = { imageURL: data.rows[0].imageurl };
-        console.log(templateVar);
+        // console.log(templateVar);
         res.render("profile", templateVar);
       })
       .catch(err => {
@@ -19,7 +19,7 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    console.log(req.body.url);
+    // console.log(req.body.url);
     const urlUserInput = req.body.url;
     return db.query(`
         UPDATE users SET imageURL = $1

@@ -1,7 +1,7 @@
 INSERT INTO
   users (username, PASSWORD, imageURL)
 VALUES
-  ('dev', 'password','https://www.nicepng.com/png/detail/875-8759926_coolcat-sticker-mlg-cat-with-glasses.png%27'),
+  ('dev', 'password','https://ih1.redbubble.net/image.2269391147.8818/st,small,845x845-pad,1000x1000,f8f8f8.jpg'),
   ('user1', 'password',NULL),
   ('user2', 'password',NULL),
   ('user3', 'password',NULL);
